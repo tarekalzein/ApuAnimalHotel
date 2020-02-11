@@ -9,11 +9,26 @@ namespace ApuAnimalsHotel.POCO
 {
     class Animal
     {
-        private Animal animal;
+        private string name;
+        private double age;
+        private CategoryType category;
+        private GenderType gender;
 
-        public Animal(Animal animal)
+
+        public Animal()
         {
-            this.animal = animal;
+            name = "";
+            age = 0;
+            gender = GenderType.Unknown;
+             
+        }
+
+        public Animal(Animal other)
+        {
+            this.name = other.name;
+            this.age = other.age;
+            this.category = other.category;
+            this.gender = other.gender;
         }
 
         public Animal(string name, double age, CategoryType category, GenderType gender)
@@ -29,5 +44,19 @@ namespace ApuAnimalsHotel.POCO
 
         public GenderType Gender { get; set; }
 
+
+        //TO DO: Complete ToString Method
+        public override string ToString()
+        {
+            string strGender = Enum.GetName(typeof(GenderType), Gender);
+            string strCategory = Enum.GetName(typeof(CategoryType), Category);
+
+            string strOut = String.Format(" {0, -12} {1,-12} {2, 12}, {3, 6} ",
+                Name, Age, strGender, strCategory);
+            //string strOut = "Name is " + Name + " Age is " + Age + " Gender is" + strGender + " Categor is " + strCategory;
+
+            strOut = strOut.ToUpper();
+            return strOut;
+        }
     }
 }

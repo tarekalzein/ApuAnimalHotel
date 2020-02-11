@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace ApuAnimalsHotel.Enums
 {
-    public enum CategoryType
+    public enum InsectSpecies
     {
-        //Bird,
-        Insect,
-        Mammal,
-        //Marine,
-        //Reptile
+        Bee,
+        Butterfly
     }
 }

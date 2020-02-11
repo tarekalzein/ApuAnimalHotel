@@ -38,23 +38,22 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.grpbx2 = new System.Windows.Forms.GroupBox();
-            this.txtLength = new System.Windows.Forms.TextBox();
-            this.txtTeeth = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.grpbxSpecialChar = new System.Windows.Forms.GroupBox();
+            this.txtChar2 = new System.Windows.Forms.TextBox();
+            this.txtChar1 = new System.Windows.Forms.TextBox();
+            this.lblChar2 = new System.Windows.Forms.Label();
+            this.lblChar1 = new System.Windows.Forms.Label();
             this.lbObject = new System.Windows.Forms.ListBox();
             this.lbCategory = new System.Windows.Forms.ListBox();
             this.cmbGender = new System.Windows.Forms.ComboBox();
             this.txtAge = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.lbResults = new System.Windows.Forms.ListBox();
             this.grpbx1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgAnimal)).BeginInit();
-            this.grpbx2.SuspendLayout();
+            this.grpbxSpecialChar.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // grpbx1
@@ -68,7 +67,7 @@
             this.grpbx1.Controls.Add(this.label3);
             this.grpbx1.Controls.Add(this.label2);
             this.grpbx1.Controls.Add(this.label1);
-            this.grpbx1.Controls.Add(this.grpbx2);
+            this.grpbx1.Controls.Add(this.grpbxSpecialChar);
             this.grpbx1.Controls.Add(this.lbObject);
             this.grpbx1.Controls.Add(this.lbCategory);
             this.grpbx1.Controls.Add(this.cmbGender);
@@ -101,7 +100,7 @@
             this.btnLoadImage.Name = "btnLoadImage";
             this.btnLoadImage.Size = new System.Drawing.Size(100, 22);
             this.btnLoadImage.TabIndex = 13;
-            this.btnLoadImage.Text = "Load animal photo";
+            this.btnLoadImage.Text = "Load photo";
             this.btnLoadImage.UseVisualStyleBackColor = true;
             this.btnLoadImage.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -174,55 +173,56 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Name";
             // 
-            // grpbx2
+            // grpbxSpecialChar
             // 
-            this.grpbx2.Controls.Add(this.txtLength);
-            this.grpbx2.Controls.Add(this.txtTeeth);
-            this.grpbx2.Controls.Add(this.label7);
-            this.grpbx2.Controls.Add(this.label6);
-            this.grpbx2.ForeColor = System.Drawing.Color.Blue;
-            this.grpbx2.Location = new System.Drawing.Point(6, 180);
-            this.grpbx2.Name = "grpbx2";
-            this.grpbx2.Size = new System.Drawing.Size(325, 106);
-            this.grpbx2.TabIndex = 5;
-            this.grpbx2.TabStop = false;
-            this.grpbx2.Text = "Mammal Specifications";
-            this.grpbx2.Visible = false;
-            this.grpbx2.Enter += new System.EventHandler(this.grpbx2_Enter);
+            this.grpbxSpecialChar.Controls.Add(this.txtChar2);
+            this.grpbxSpecialChar.Controls.Add(this.txtChar1);
+            this.grpbxSpecialChar.Controls.Add(this.lblChar2);
+            this.grpbxSpecialChar.Controls.Add(this.lblChar1);
+            this.grpbxSpecialChar.ForeColor = System.Drawing.Color.Blue;
+            this.grpbxSpecialChar.Location = new System.Drawing.Point(6, 180);
+            this.grpbxSpecialChar.Name = "grpbxSpecialChar";
+            this.grpbxSpecialChar.Size = new System.Drawing.Size(325, 106);
+            this.grpbxSpecialChar.TabIndex = 5;
+            this.grpbxSpecialChar.TabStop = false;
+            this.grpbxSpecialChar.Text = "Special Characteristics";
+            this.grpbxSpecialChar.Enter += new System.EventHandler(this.grpbx2_Enter);
             // 
-            // txtLength
+            // txtChar2
             // 
-            this.txtLength.Location = new System.Drawing.Point(94, 65);
-            this.txtLength.Name = "txtLength";
-            this.txtLength.Size = new System.Drawing.Size(100, 20);
-            this.txtLength.TabIndex = 3;
+            this.txtChar2.Location = new System.Drawing.Point(124, 65);
+            this.txtChar2.Name = "txtChar2";
+            this.txtChar2.Size = new System.Drawing.Size(100, 20);
+            this.txtChar2.TabIndex = 3;
+            this.txtChar2.Visible = false;
             // 
-            // txtTeeth
+            // txtChar1
             // 
-            this.txtTeeth.Location = new System.Drawing.Point(94, 34);
-            this.txtTeeth.Name = "txtTeeth";
-            this.txtTeeth.Size = new System.Drawing.Size(100, 20);
-            this.txtTeeth.TabIndex = 2;
+            this.txtChar1.Location = new System.Drawing.Point(124, 31);
+            this.txtChar1.Name = "txtChar1";
+            this.txtChar1.Size = new System.Drawing.Size(100, 20);
+            this.txtChar1.TabIndex = 2;
+            this.txtChar1.Visible = false;
             // 
-            // label7
+            // lblChar2
             // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.Blue;
-            this.label7.Location = new System.Drawing.Point(7, 65);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(59, 13);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "Tail Length";
+            this.lblChar2.AutoSize = true;
+            this.lblChar2.ForeColor = System.Drawing.Color.Blue;
+            this.lblChar2.Location = new System.Drawing.Point(7, 65);
+            this.lblChar2.Name = "lblChar2";
+            this.lblChar2.Size = new System.Drawing.Size(98, 13);
+            this.lblChar2.TabIndex = 1;
+            this.lblChar2.Text = "Special character 2";
             // 
-            // label6
+            // lblChar1
             // 
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.Color.Blue;
-            this.label6.Location = new System.Drawing.Point(6, 34);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(66, 13);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "No. of teeth";
+            this.lblChar1.AutoSize = true;
+            this.lblChar1.ForeColor = System.Drawing.Color.Blue;
+            this.lblChar1.Location = new System.Drawing.Point(6, 34);
+            this.lblChar1.Name = "lblChar1";
+            this.lblChar1.Size = new System.Drawing.Size(100, 13);
+            this.lblChar1.TabIndex = 0;
+            this.lblChar1.Text = "Special Character 1";
             // 
             // lbObject
             // 
@@ -268,7 +268,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Controls.Add(this.lbResults);
             this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.groupBox2.Location = new System.Drawing.Point(12, 342);
             this.groupBox2.Name = "groupBox2";
@@ -277,13 +277,13 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "List of registered animals";
             // 
-            // dataGridView1
+            // lbResults
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(9, 19);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(573, 143);
-            this.dataGridView1.TabIndex = 0;
+            this.lbResults.FormattingEnabled = true;
+            this.lbResults.Location = new System.Drawing.Point(6, 20);
+            this.lbResults.Name = "lbResults";
+            this.lbResults.Size = new System.Drawing.Size(576, 160);
+            this.lbResults.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -299,10 +299,9 @@
             this.grpbx1.ResumeLayout(false);
             this.grpbx1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgAnimal)).EndInit();
-            this.grpbx2.ResumeLayout(false);
-            this.grpbx2.PerformLayout();
+            this.grpbxSpecialChar.ResumeLayout(false);
+            this.grpbxSpecialChar.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -319,17 +318,17 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox grpbx2;
-        private System.Windows.Forms.TextBox txtLength;
-        private System.Windows.Forms.TextBox txtTeeth;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.GroupBox grpbxSpecialChar;
+        private System.Windows.Forms.TextBox txtChar2;
+        private System.Windows.Forms.TextBox txtChar1;
+        private System.Windows.Forms.Label lblChar2;
+        private System.Windows.Forms.Label lblChar1;
         private System.Windows.Forms.ListBox lbObject;
         private System.Windows.Forms.ListBox lbCategory;
         private System.Windows.Forms.ComboBox cmbGender;
         private System.Windows.Forms.TextBox txtAge;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ListBox lbResults;
     }
 }
