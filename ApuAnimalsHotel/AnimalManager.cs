@@ -11,16 +11,25 @@ namespace ApuAnimalsHotel
     {
 
         private List<Animal> m_animalList;
+        private int id;
 
         public AnimalManager() 
         {
             m_animalList = new List<Animal>();
+            id = 1;
+            
         }
 
         public void Add(Animal animalObj)
         {
             if (animalObj != null)
+            {
+                animalObj.Id = id;
                 m_animalList.Add(animalObj);
+                id++;
+                
+
+            }
         }
 
         public Animal GetElementAtPosition(int index)
@@ -50,6 +59,8 @@ namespace ApuAnimalsHotel
         {
             get { return m_animalList.Count; }
         }
+
+       
         
     }
 }

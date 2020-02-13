@@ -36,11 +36,11 @@ namespace ApuAnimalsHotel.POCO
             this.countOfLegs = CountOfLegs;
         }
 
-        public Insect(int countOfLegs, string name, double age, CategoryType category, GenderType gender) :base(name,age, category,gender)
-        {
-            countOfLegs = CountOfLegs;
-            category = CategoryType.Insect;
-        }
+        //public Insect(int countOfLegs, string name, double age, CategoryType category, GenderType gender) :base(name,age, category,gender)
+        //{
+        //    countOfLegs = CountOfLegs;
+        //    category = CategoryType.Insect;
+        //}
         public int CountOfLegs {
             get { return countOfLegs; }
             set

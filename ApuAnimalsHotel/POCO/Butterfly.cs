@@ -23,6 +23,7 @@ namespace ApuAnimalsHotel.POCO
             this.Gender = other.Gender;
             this.CountOfLegs = other.CountOfLegs;
             this.wingColor = other.wingColor;
+            this.Id = other.Id;
         }
 
         public Butterfly(Insect other)
@@ -32,6 +33,8 @@ namespace ApuAnimalsHotel.POCO
             this.Category = other.Category;
             this.Gender = other.Gender;
             this.CountOfLegs = other.CountOfLegs;
+            this.Id = other.Id;
+
         }
 
         public string WingColor

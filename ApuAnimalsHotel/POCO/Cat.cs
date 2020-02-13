@@ -23,6 +23,7 @@ namespace ApuAnimalsHotel.POCO
             this.Gender = other.Gender;
             this.TeethCount = other.TeethCount;
             this.Breed = other.breed;
+            this.Id = other.Id;
         }
         public Cat(Mammal other)
         {
@@ -32,13 +33,14 @@ namespace ApuAnimalsHotel.POCO
             this.Gender = other.Gender;
             this.TeethCount = other.TeethCount;
             this.breed = Breed;
+            this.Id = other.Id;
         }
 
-        public Cat(string breed, int teethCount, string name, double age, CategoryType category, GenderType gender) :
-            base(teethCount, name, age, category, gender)
-        {
-            breed = Breed;
-        }
+        //public Cat(string breed, int teethCount, string name, double age, CategoryType category, GenderType gender) :
+        //    base(teethCount, name, age, category, gender)
+        //{
+        //    breed = Breed;
+        //}
         public string Breed
         {
             get { return breed; }

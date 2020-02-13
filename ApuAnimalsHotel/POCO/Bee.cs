@@ -23,6 +23,8 @@ namespace ApuAnimalsHotel.POCO
             this.Gender = other.Gender;
             this.CountOfLegs = other.CountOfLegs;
             this.beeSpecies = other.beeSpecies;
+            this.Id = other.Id;
+
         }
         public Bee(Insect other)
         {
@@ -31,12 +33,14 @@ namespace ApuAnimalsHotel.POCO
             this.Category = other.Category;
             this.Gender = other.Gender;
             this.CountOfLegs = other.CountOfLegs;
+            this.Id = other.Id;
+
         }
-        public Bee(string beeSpecies,int countOfLegs, string name, double age, CategoryType category,GenderType gender)
-            :base(countOfLegs,name,age,category,gender)
-        {
-            beeSpecies = BeeSpecies;
-        }
+        //public Bee(string beeSpecies,int countOfLegs, string name, double age, CategoryType category,GenderType gender)
+        //    :base(countOfLegs,name,age,category,gender)
+        //{
+        //    beeSpecies = BeeSpecies;
+        //}
         public string BeeSpecies
         {
             get { return beeSpecies; }

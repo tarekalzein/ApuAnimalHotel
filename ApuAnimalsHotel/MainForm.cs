@@ -90,7 +90,7 @@ namespace ApuAnimalsHotel
                                 string breed= CheckCharacteristic_2(out char2Ok);
                                 if (char2Ok)
                                 {
-                                    dog.Breed = breed;
+                                    dog.Breed = breed;                                    
                                     animalManager.Add(dog);
                                 }
                                 break;

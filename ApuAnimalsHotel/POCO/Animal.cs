@@ -10,6 +10,7 @@ namespace ApuAnimalsHotel.POCO
     class Animal
     {
         private string name;
+        private int id;
         private double age;
         private CategoryType category;
         private GenderType gender;
@@ -17,6 +18,7 @@ namespace ApuAnimalsHotel.POCO
 
         public Animal()
         {
+           
             name = "";
             age = 0;
             gender = GenderType.Unknown;
@@ -29,6 +31,7 @@ namespace ApuAnimalsHotel.POCO
             this.age = other.age;
             this.category = other.category;
             this.gender = other.gender;
+            this.id = other.id;
         }
 
         public Animal(string name, double age, CategoryType category, GenderType gender)
@@ -37,6 +40,7 @@ namespace ApuAnimalsHotel.POCO
             age = Age;
             category = Category;
             gender = Gender;
+            
         }
         public string Name { get; set; }
         public double Age { get; set; }
@@ -44,6 +48,7 @@ namespace ApuAnimalsHotel.POCO
 
         public GenderType Gender { get; set; }
 
+        public int Id { get; set; }
 
         //TO DO: Complete ToString Method
         public override string ToString()
@@ -52,7 +57,7 @@ namespace ApuAnimalsHotel.POCO
             string strCategory = Enum.GetName(typeof(CategoryType), Category);
 
             string strOut = String.Format(" {0, -12} {1,-12} {2, 12}, {3, 6} ",
-                Name, Age, strGender, strCategory);
+               Id, Name, Age, strGender, strCategory);
             //string strOut = "Name is " + Name + " Age is " + Age + " Gender is" + strGender + " Categor is " + strCategory;
 
             strOut = strOut.ToUpper();
