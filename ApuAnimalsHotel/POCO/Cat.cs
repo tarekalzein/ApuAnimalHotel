@@ -31,6 +31,7 @@ namespace ApuAnimalsHotel.POCO
             this.Category = other.Category;
             this.Gender = other.Gender;
             this.TeethCount = other.TeethCount;
+            this.breed = Breed;
         }
 
         public Cat(string breed, int teethCount, string name, double age, CategoryType category, GenderType gender) :
@@ -43,8 +44,12 @@ namespace ApuAnimalsHotel.POCO
             get { return breed; }
             set
             {
-                if (String.IsNullOrEmpty(value)) { breed = value; }
+                if (!String.IsNullOrEmpty(value)) { breed = value; }
             }
+        }
+        public override string ToString()
+        {
+            return base.ToString() + " the breed is" + Breed;
         }
     }
 }

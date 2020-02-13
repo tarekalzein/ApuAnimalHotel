@@ -37,20 +37,20 @@ namespace ApuAnimalsHotel.POCO
         public Dog(string breed,int teethCount, string name, double age,CategoryType category,GenderType gender ) :
             base (teethCount,name,age, category,gender)
         {
-            breed = Breed;
+            breed= Breed;
         }
         public string Breed 
         {
             get { return breed; }
             set
             {
-                if (String.IsNullOrEmpty(value)) { breed = value; }
+                if (!String.IsNullOrEmpty(value)) { breed = value; }
             }
         }
 
         public override string ToString()
         {
-            return String.Format(" {0} {1}", base.ToString(), Breed.ToUpper());
+            return base.ToString() + " the breed is" +Breed;
         }
     }
 }

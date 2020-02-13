@@ -203,6 +203,7 @@
             this.txtChar1.Size = new System.Drawing.Size(100, 20);
             this.txtChar1.TabIndex = 2;
             this.txtChar1.Visible = false;
+            this.txtChar1.TextChanged += new System.EventHandler(this.txtChar1_TextChanged);
             // 
             // lblChar2
             // 

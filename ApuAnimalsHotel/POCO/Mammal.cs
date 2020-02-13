@@ -14,6 +14,7 @@ namespace ApuAnimalsHotel.POCO
         public Mammal(): base()
         {
             Category = CategoryType.Mammal;
+            teethCount = 0;
         }
 
         public Mammal(Mammal other) 
@@ -37,6 +38,7 @@ namespace ApuAnimalsHotel.POCO
             this.Name = other.Name;
             this.Age = other.Age;
             this.Gender = other.Gender;
+            this.teethCount = TeethCount;
         }
 
         public int TeethCount
@@ -52,5 +54,10 @@ namespace ApuAnimalsHotel.POCO
             } 
         }
         //To DO: ToString()
+
+        public override string ToString()
+        {
+            return base.ToString() + TeethCount;
+        }
     }
 }

@@ -33,6 +33,7 @@ namespace ApuAnimalsHotel.POCO
             this.Name = other.Name;
             this.Age = other.Age;
             this.Gender = other.Gender;
+            this.countOfLegs = CountOfLegs;
         }
 
         public Insect(int countOfLegs, string name, double age, CategoryType category, GenderType gender) :base(name,age, category,gender)
@@ -52,5 +53,9 @@ namespace ApuAnimalsHotel.POCO
         }
 
         //To Do: ToString()
+        public override string ToString()
+        {
+            return base.ToString() +" Count of Legs "+ CountOfLegs;
+        }
     }
 }

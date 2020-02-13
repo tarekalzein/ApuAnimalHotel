@@ -39,9 +39,13 @@ namespace ApuAnimalsHotel.POCO
             get { return wingColor; }
             set 
             {
-                if (String.IsNullOrEmpty(value))
+                if (!String.IsNullOrEmpty(value))
                     wingColor = value;
             }
+        }
+        public override string ToString()
+        {
+            return base.ToString()+" Wings Color is: "+WingColor;
         }
     }
 }

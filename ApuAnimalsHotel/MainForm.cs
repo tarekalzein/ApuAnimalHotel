@@ -44,7 +44,7 @@ namespace ApuAnimalsHotel
             {
                 cmbGender.Items.Add(genderType);
             }
-            cmbGender.SelectedIndex = (int)GenderType.Unknown;
+            cmbGender.SelectedIndex = (int)GenderType.Unknown; //set default value to Unknown
         }
 
 
@@ -68,6 +68,7 @@ namespace ApuAnimalsHotel
         private void button1_Click(object sender, EventArgs e)
         {
             Animal animal;
+
             bool ok = ReadInput(out animal);
             if (ok)
             {
@@ -80,15 +81,16 @@ namespace ApuAnimalsHotel
                     if (char1Ok)
                     {
                         Mammal mammal = new Mammal(animal);
+                        mammal.TeethCount = int.Parse(CheckCharacteristic_1(out char1Ok));
                         switch ((MammalSpecies)lbObject.SelectedIndex)
                         {
                             case MammalSpecies.Dog:
                                 Dog dog = new Dog(mammal);
                                 bool char2Ok = false;
-                                CheckCharacteristic_2(out char2Ok);
+                                string breed= CheckCharacteristic_2(out char2Ok);
                                 if (char2Ok)
                                 {
-                                    dog.Breed = CheckCharacteristic_2(out char2Ok);
+                                    dog.Breed = breed;
                                     animalManager.Add(dog);
                                 }
                                 break;
@@ -112,6 +114,7 @@ namespace ApuAnimalsHotel
                     if (char1Ok)
                     {
                         Insect insect = new Insect(animal);
+                        insect.CountOfLegs = int.Parse(CheckCharacteristic_1(out char1Ok));
                         switch ((InsectSpecies)lbObject.SelectedIndex)
                         {
                             case InsectSpecies.Bee:
@@ -201,10 +204,13 @@ namespace ApuAnimalsHotel
         private void lbCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+            if (lbCategory.SelectedItem != null) 
+            {
+                CategoryType categoryType = (CategoryType)lbCategory.SelectedItem;
 
-            CategoryType categoryType = (CategoryType)lbCategory.SelectedItem;
-
-            createAnimalObjectList(categoryType);
+                createAnimalObjectList(categoryType);
+            }
+            
 
         }
 
@@ -330,7 +336,10 @@ namespace ApuAnimalsHotel
 
         }
 
+        private void txtChar1_TextChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 
 

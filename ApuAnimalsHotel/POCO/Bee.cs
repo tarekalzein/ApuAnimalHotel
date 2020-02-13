@@ -42,9 +42,14 @@ namespace ApuAnimalsHotel.POCO
             get { return beeSpecies; }
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (!String.IsNullOrEmpty(value))                    
                     beeSpecies = value;
             }
+        }
+
+        public override string ToString()
+        {
+            return base.ToString()+" Bee Species: "+BeeSpecies;
         }
     }
 }
