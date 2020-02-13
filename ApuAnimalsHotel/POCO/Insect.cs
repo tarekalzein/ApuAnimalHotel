@@ -55,7 +55,7 @@ namespace ApuAnimalsHotel.POCO
         //To Do: ToString()
         public override string ToString()
         {
-            return base.ToString() +" Count of Legs "+ CountOfLegs;
+            return String.Format("{0, -25} {1, -12}", base.ToString(),("Count of Legs: " + CountOfLegs +", "));
         }
     }
 }

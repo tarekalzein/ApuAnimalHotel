@@ -245,6 +245,7 @@
             // 
             // cmbGender
             // 
+            this.cmbGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbGender.FormattingEnabled = true;
             this.cmbGender.Location = new System.Drawing.Point(60, 139);
             this.cmbGender.Name = "cmbGender";

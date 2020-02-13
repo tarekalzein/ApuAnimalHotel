@@ -53,7 +53,8 @@ namespace ApuAnimalsHotel.POCO
 
         public override string ToString()
         {
-            return base.ToString()+" Bee Species: "+BeeSpecies;
+            
+            return String.Format("{0, -12} {1,-12}", base.ToString(), "Bee Species: "+BeeSpecies.ToUpper());
         }
     }
 }
