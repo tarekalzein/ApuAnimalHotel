@@ -104,7 +104,6 @@ namespace ApuAnimalsHotel
 
         private void lbCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             if (lbCategory.SelectedItem != null) 
             {
                 CategoryType categoryType = (CategoryType)lbCategory.SelectedItem;
