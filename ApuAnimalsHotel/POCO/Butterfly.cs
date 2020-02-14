@@ -48,7 +48,8 @@ namespace ApuAnimalsHotel.POCO
         }
         public override string ToString()
         {
-            return base.ToString()+" Wings Color is: "+WingColor;
+            return String.Format("{0, -12} {1,-12}", base.ToString(), " Wings Color is: " + WingColor);
+
         }
     }
 }

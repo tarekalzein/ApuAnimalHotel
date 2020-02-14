@@ -50,6 +50,11 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lbResults = new System.Windows.Forms.ListBox();
+            this.lb_id = new System.Windows.Forms.Label();
+            this.lbl_name = new System.Windows.Forms.Label();
+            this.lbl_age = new System.Windows.Forms.Label();
+            this.lbl_gender = new System.Windows.Forms.Label();
+            this.lbl_special = new System.Windows.Forms.Label();
             this.grpbx1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgAnimal)).BeginInit();
             this.grpbxSpecialChar.SuspendLayout();
@@ -270,6 +275,11 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.lbl_special);
+            this.groupBox2.Controls.Add(this.lbl_gender);
+            this.groupBox2.Controls.Add(this.lbl_age);
+            this.groupBox2.Controls.Add(this.lbl_name);
+            this.groupBox2.Controls.Add(this.lb_id);
             this.groupBox2.Controls.Add(this.lbResults);
             this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.groupBox2.Location = new System.Drawing.Point(12, 342);
@@ -282,10 +292,55 @@
             // lbResults
             // 
             this.lbResults.FormattingEnabled = true;
-            this.lbResults.Location = new System.Drawing.Point(6, 20);
+            this.lbResults.Location = new System.Drawing.Point(6, 33);
             this.lbResults.Name = "lbResults";
-            this.lbResults.Size = new System.Drawing.Size(576, 160);
+            this.lbResults.Size = new System.Drawing.Size(576, 147);
             this.lbResults.TabIndex = 0;
+            // 
+            // lb_id
+            // 
+            this.lb_id.AutoSize = true;
+            this.lb_id.Location = new System.Drawing.Point(10, 20);
+            this.lb_id.Name = "lb_id";
+            this.lb_id.Size = new System.Drawing.Size(18, 13);
+            this.lb_id.TabIndex = 1;
+            this.lb_id.Text = "ID";
+            // 
+            // lbl_name
+            // 
+            this.lbl_name.AutoSize = true;
+            this.lbl_name.Location = new System.Drawing.Point(49, 19);
+            this.lbl_name.Name = "lbl_name";
+            this.lbl_name.Size = new System.Drawing.Size(34, 13);
+            this.lbl_name.TabIndex = 2;
+            this.lbl_name.Text = "Name";
+            // 
+            // lbl_age
+            // 
+            this.lbl_age.AutoSize = true;
+            this.lbl_age.Location = new System.Drawing.Point(126, 19);
+            this.lbl_age.Name = "lbl_age";
+            this.lbl_age.Size = new System.Drawing.Size(26, 13);
+            this.lbl_age.TabIndex = 3;
+            this.lbl_age.Text = "Age";
+            // 
+            // lbl_gender
+            // 
+            this.lbl_gender.AutoSize = true;
+            this.lbl_gender.Location = new System.Drawing.Point(199, 19);
+            this.lbl_gender.Name = "lbl_gender";
+            this.lbl_gender.Size = new System.Drawing.Size(42, 13);
+            this.lbl_gender.TabIndex = 4;
+            this.lbl_gender.Text = "Gender";
+            // 
+            // lbl_special
+            // 
+            this.lbl_special.AutoSize = true;
+            this.lbl_special.Location = new System.Drawing.Point(338, 20);
+            this.lbl_special.Name = "lbl_special";
+            this.lbl_special.Size = new System.Drawing.Size(96, 13);
+            this.lbl_special.TabIndex = 5;
+            this.lbl_special.Text = "Special Characters";
             // 
             // MainForm
             // 
@@ -304,6 +359,7 @@
             this.grpbxSpecialChar.ResumeLayout(false);
             this.grpbxSpecialChar.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -332,5 +388,10 @@
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ListBox lbResults;
+        private System.Windows.Forms.Label lbl_special;
+        private System.Windows.Forms.Label lbl_gender;
+        private System.Windows.Forms.Label lbl_age;
+        private System.Windows.Forms.Label lbl_name;
+        private System.Windows.Forms.Label lb_id;
     }
 }

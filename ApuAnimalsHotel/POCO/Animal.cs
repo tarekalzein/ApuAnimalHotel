@@ -56,7 +56,7 @@ namespace ApuAnimalsHotel.POCO
             string strGender = Enum.GetName(typeof(GenderType), Gender);
             string strCategory = Enum.GetName(typeof(CategoryType), Category);
 
-            string strOut = String.Format(" {0, -12} {1,-12} {2, -12} {3, -12} ",
+            string strOut = String.Format(" {0, -12} {1,-20} {2, -20} {3, -20} ",
                Id, Name, Age, strGender, strCategory);
             //string strOut = "Name is " + Name + " Age is " + Age + " Gender is" + strGender + " Categor is " + strCategory;
 
