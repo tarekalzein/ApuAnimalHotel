@@ -19,40 +19,13 @@ namespace ApuAnimalsHotel
         private AnimalManager animalManager = null;
         public MainForm()
         {
-
-            InitializeComponent();
-            lblChar1.Text = ""; //remove label text on first run.
-            lblChar2.Text = "";
-
-
-            //Create an instance of AnimalManager to hold List<> for data entry.
-            animalManager = new AnimalManager();
-
-
-
-            //TO DO: move into a method .e.g. MyInitialization();
-            //List CategoryType items in list box.
-            Array categoryArray = typeof(CategoryType).GetEnumValues();
-            foreach (CategoryType categoryType in categoryArray)
-            {
-                lbCategory.Items.Add(categoryType);
-            }
-
-            //List Gender types in Combo box.
-            Array genderArray = Enum.GetValues(typeof(GenderType));
-            foreach (GenderType genderType in genderArray)
-            {
-                cmbGender.Items.Add(genderType);
-            }
-            cmbGender.SelectedIndex = (int)GenderType.Unknown; //set default value to Unknown
-        }
-
-
+            InitializeComponent();           
+            InitializeGui();
+        }        
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
-
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -71,81 +44,13 @@ namespace ApuAnimalsHotel
 
             bool ok = ReadInput(out animal);
             if (ok)
-            {
+            {                
                 CategoryType categoryType = (CategoryType)lbCategory.SelectedItem;
-
-                if (categoryType == CategoryType.Mammal)
-                {
-                    bool char1Ok = false;
-                    CheckCharacteristic_1(out char1Ok);
-                    if (char1Ok)
-                    {
-                        Mammal mammal = new Mammal(animal);
-                        mammal.TeethCount = int.Parse(CheckCharacteristic_1(out char1Ok));
-                        switch ((MammalSpecies)lbObject.SelectedIndex)
-                        {
-                            case MammalSpecies.Dog:
-                                Dog dog = new Dog(mammal);
-                                bool char2Ok = false;
-                                string breed= CheckCharacteristic_2(out char2Ok);
-                                if (char2Ok)
-                                {
-                                    dog.Breed = breed;                                    
-                                    animalManager.Add(dog);
-                                }
-                                break;
-                            case MammalSpecies.Cat:
-                                Cat cat = new Cat(mammal);
-                                char2Ok = false;
-                                CheckCharacteristic_2(out char2Ok);
-                                if (char2Ok)
-                                {
-                                    cat.Breed = CheckCharacteristic_2(out char2Ok);
-                                    animalManager.Add(cat);
-                                }
-                                break;
-                        }
-                    }
-                }
-                if (categoryType == CategoryType.Insect)
-                {
-                    bool char1Ok = false;
-                    CheckCharacteristic_1(out char1Ok);
-                    if (char1Ok)
-                    {
-                        Insect insect = new Insect(animal);
-                        insect.CountOfLegs = int.Parse(CheckCharacteristic_1(out char1Ok));
-                        switch ((InsectSpecies)lbObject.SelectedIndex)
-                        {
-                            case InsectSpecies.Bee:
-                                Bee bee = new Bee(insect);
-                                bool char2Ok = false;
-                                CheckCharacteristic_2(out char2Ok);
-                                if (char2Ok)
-                                {
-                                    bee.BeeSpecies = CheckCharacteristic_2(out char2Ok);
-                                    animalManager.Add(bee);
-                                }
-                                break;
-                            case InsectSpecies.Butterfly:
-                                Butterfly butterfly = new Butterfly(insect);
-                                char2Ok = false;
-                                CheckCharacteristic_2(out char2Ok);
-                                if (char2Ok)
-                                {
-                                    butterfly.WingColor = CheckCharacteristic_2(out char2Ok);
-                                    animalManager.Add(butterfly);
-                                }
-                                break;
-                        }
-                    }
-                }
-
-
+                CreateAnimalData(categoryType, animal);                
             }
             UpdateResults();
-
         }
+
         private void UpdateResults()
         {
             lbResults.Items.Clear();
@@ -153,13 +58,11 @@ namespace ApuAnimalsHotel
             {
                 Animal animal = animalManager.GetElementAtPosition(index);
                 lbResults.Items.Add(animal.ToString());
-
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
         }
 
         private void lbObject_SelectedIndexChanged(object sender, EventArgs e)
@@ -187,8 +90,6 @@ namespace ApuAnimalsHotel
                     lblChar2.Text = "Wings Color";
                     break;
             }
-
-
         }
 
         private void txtName_TextChanged(object sender, EventArgs e)
@@ -207,25 +108,118 @@ namespace ApuAnimalsHotel
             if (lbCategory.SelectedItem != null) 
             {
                 CategoryType categoryType = (CategoryType)lbCategory.SelectedItem;
-
-                createAnimalObjectList(categoryType);
-            }
-            
+                CreateAnimalObjectList(categoryType);
+            }            
 
         }
 
         private void grpbx2_Enter(object sender, EventArgs e)
         {
-
         }
 
-        private void createAnimalObjectList(CategoryType categoryType)
+        private void InitializeGui()
+        {
+
+            lblChar1.Text = ""; //remove label text on first run.
+            lblChar2.Text = "";
+
+            //Create an instance of AnimalManager to hold List<> for data entry.
+            animalManager = new AnimalManager();
+
+
+
+            //TO DO: move into a method .e.g. MyInitialization();
+            //List CategoryType items in list box.
+            Array categoryArray = typeof(CategoryType).GetEnumValues();
+            foreach (CategoryType categoryType in categoryArray)
+            {
+                lbCategory.Items.Add(categoryType);
+            }
+
+            //List Gender types in Combo box.
+            Array genderArray = Enum.GetValues(typeof(GenderType));
+            foreach (GenderType genderType in genderArray)
+            {
+                cmbGender.Items.Add(genderType);
+            }
+            cmbGender.SelectedIndex = (int)GenderType.Unknown; //set default value to Unknown
+        }
+
+        private void CreateAnimalData(CategoryType categoryType, Animal animal)
+        {
+            if (categoryType == CategoryType.Mammal)
+            {
+                bool char1Ok = false;
+                CheckCharacteristic_1(out char1Ok);
+                if (char1Ok)
+                {
+                    Mammal mammal = new Mammal(animal);
+                    mammal.TeethCount = int.Parse(CheckCharacteristic_1(out char1Ok));
+                    switch ((MammalSpecies)lbObject.SelectedIndex)
+                    {
+                        case MammalSpecies.Dog:
+                            Dog dog = new Dog(mammal);
+                            bool char2Ok = false;
+                            string breed = CheckCharacteristic_2(out char2Ok);
+                            if (char2Ok)
+                            {
+                                dog.Breed = breed;
+                                animalManager.Add(dog);
+                            }
+                            break;
+                        case MammalSpecies.Cat:
+                            Cat cat = new Cat(mammal);
+                            char2Ok = false;
+                            CheckCharacteristic_2(out char2Ok);
+                            if (char2Ok)
+                            {
+                                cat.Breed = CheckCharacteristic_2(out char2Ok);
+                                animalManager.Add(cat);
+                            }
+                            break;
+                    }
+                }
+            }
+            if (categoryType == CategoryType.Insect)
+            {
+                bool char1Ok = false;
+                CheckCharacteristic_1(out char1Ok);
+                if (char1Ok)
+                {
+                    Insect insect = new Insect(animal);
+                    insect.CountOfLegs = int.Parse(CheckCharacteristic_1(out char1Ok));
+                    switch ((InsectSpecies)lbObject.SelectedIndex)
+                    {
+                        case InsectSpecies.Bee:
+                            Bee bee = new Bee(insect);
+                            bool char2Ok = false;
+                            CheckCharacteristic_2(out char2Ok);
+                            if (char2Ok)
+                            {
+                                bee.BeeSpecies = CheckCharacteristic_2(out char2Ok);
+                                animalManager.Add(bee);
+                            }
+                            break;
+                        case InsectSpecies.Butterfly:
+                            Butterfly butterfly = new Butterfly(insect);
+                            char2Ok = false;
+                            CheckCharacteristic_2(out char2Ok);
+                            if (char2Ok)
+                            {
+                                butterfly.WingColor = CheckCharacteristic_2(out char2Ok);
+                                animalManager.Add(butterfly);
+                            }
+                            break;
+                    }
+                }
+            }
+        }
+        private void CreateAnimalObjectList(CategoryType categoryType)
         {
             //Enable text boxes that are disabled by default.
             txtChar1.Visible = true;
 
-
-            lbObject.Items.Clear();
+            lbObject.Items.Clear(); //prevent duplicating data in the list.
 
             switch (categoryType)
             {
