@@ -13,6 +13,7 @@ namespace ApuAnimalsHotel
         private List<Animal> m_animalList;
         private int id;
 
+        //Constructor with no parameters. Creates a list of Animals and resets the ID counter to 1.
         public AnimalManager() 
         {
             m_animalList = new List<Animal>();
@@ -26,12 +27,13 @@ namespace ApuAnimalsHotel
             {
                 animalObj.Id = id;
                 m_animalList.Add(animalObj);
-                id++;
+                id++; //Increment ID after every successful add.
                 
 
             }
         }
 
+        //Method to get index number for an element in the list.
         public Animal GetElementAtPosition(int index)
         {
             if (IsIndexValid(index))
@@ -50,6 +52,7 @@ namespace ApuAnimalsHotel
                 return null;
         }
 
+        //method to check validity of index (if within scope).
         public bool IsIndexValid(int index)
         {
             return ((index >= 0) && (index < m_animalList.Count));

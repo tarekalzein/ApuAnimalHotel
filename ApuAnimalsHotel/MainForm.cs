@@ -14,13 +14,14 @@ namespace ApuAnimalsHotel
 {
     public partial class MainForm : Form
     {
+        
         string MAMMAL_CHAR_LABEL = "Count of teeth";
 
         private AnimalManager animalManager = null;
         public MainForm()
         {
             InitializeComponent();           
-            InitializeGui();
+            InitializeGui(); //Own initialization of some GUI components.
         }        
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -42,22 +43,22 @@ namespace ApuAnimalsHotel
         {
             Animal animal;
 
-            bool ok = ReadInput(out animal);
+            bool ok = ReadInput(out animal); //Read the general input (name, age and gender).
             if (ok)
             {                
                 CategoryType categoryType = (CategoryType)lbCategory.SelectedItem;
                 CreateAnimalData(categoryType, animal);                
             }
-            UpdateResults();
+            UpdateResults(); //update results in the result list.
         }
 
         private void UpdateResults()
         {
-            lbResults.Items.Clear();
+            lbResults.Items.Clear(); //start with a clean list.
             for (int index = 0; index < animalManager.ElementCount; index++)
             {
-                Animal animal = animalManager.GetElementAtPosition(index);
-                lbResults.Items.Add(animal.ToString());
+                Animal animal = animalManager.GetElementAtPosition(index);  //Get the index of the animal in the list.
+                lbResults.Items.Add(animal.ToString()); //add fetched data to the list.
             }
         }
 
@@ -70,7 +71,7 @@ namespace ApuAnimalsHotel
             //enable text box for species specific character.
             txtChar2.Visible = true;
 
-            var lbObjectSelection = lbObject.SelectedItem;
+            var lbObjectSelection = lbObject.SelectedItem; //read animal object controller and rename label according to animal type.
 
             switch (lbObjectSelection)
             {
@@ -104,10 +105,10 @@ namespace ApuAnimalsHotel
 
         private void lbCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lbCategory.SelectedItem != null) 
+            if (lbCategory.SelectedItem != null) //to prevent crashes.
             {
                 CategoryType categoryType = (CategoryType)lbCategory.SelectedItem;
-                CreateAnimalObjectList(categoryType);
+                CreateAnimalObjectList(categoryType); //create animal subcategories list.
             }            
 
         }
@@ -149,7 +150,7 @@ namespace ApuAnimalsHotel
             if (categoryType == CategoryType.Mammal)
             {
                 bool char1Ok = false;
-                CheckCharacteristic_1(out char1Ok);
+                CheckCharacteristic_1(out char1Ok); //check if input is correct and continue if true.
                 if (char1Ok)
                 {
                     Mammal mammal = new Mammal(animal);
@@ -159,7 +160,7 @@ namespace ApuAnimalsHotel
                         case MammalSpecies.Dog:
                             Dog dog = new Dog(mammal);
                             bool char2Ok = false;
-                            string breed = CheckCharacteristic_2(out char2Ok);
+                            string breed = CheckCharacteristic_2(out char2Ok); 
                             if (char2Ok)
                             {
                                 dog.Breed = breed;
@@ -235,21 +236,9 @@ namespace ApuAnimalsHotel
                     foreach (InsectSpecies insectSpecies in insectsArray)
                         lbObject.Items.Add(insectSpecies);
                     break;
-
-                //case CategoryType.Bird:
-                //    lblChar1.Text = "Bird CHAR"; //TO DO Change text and make it constant string
-                //    break;
-
-                //case CategoryType.Marine:
-                //    lblChar1.Text = "Marine CHAR"; //TO DO Change text and make it constant string
-                //    break;
-
-                //case CategoryType.Reptile:
-                //    lblChar1.Text = "Reptile CHAR"; //TO DO Change text and make it constant string
-                //    break;
             }
         }
-
+        //Method to validate input in Name field
         private string CheckName(out bool success)
         {
             string name = txtName.Text;
@@ -262,6 +251,8 @@ namespace ApuAnimalsHotel
             return name;
 
         }
+
+        //Method to validate input in Age field
 
         private double CheckAge(out bool success)
         {
@@ -279,6 +270,7 @@ namespace ApuAnimalsHotel
             return age;
         }
 
+        //Method to validate input in Species special character(characeter 1) field
         private string CheckCharacteristic_1(out bool success)
         {
 
@@ -289,10 +281,9 @@ namespace ApuAnimalsHotel
                 MessageBox.Show("Please fill the Animal's special character");
             }
             return char1;
-            //if (String.IsNullOrEmpty(txtChar1.Text))
-            //    MessageBox.Show("Please fill the Animal's special character");
         }
 
+        //Method to validate input in Species special character(characeter 1) field
         private string CheckCharacteristic_2(out bool success)
         {
 
@@ -303,8 +294,6 @@ namespace ApuAnimalsHotel
                 MessageBox.Show("Please fill the Animal's special character");
             }
             return char2;
-            //if (String.IsNullOrEmpty(txtChar2.Text))
-            //    MessageBox.Show("Please fill the Animal's special character");
         }
 
         private bool ReadInput(out Animal animal)
@@ -323,12 +312,7 @@ namespace ApuAnimalsHotel
             return ageOk && nameOk;
         }
 
-        private void AddAnimal()
-        {
-            //Animal animalObj
-
-        }
-
+ 
         private void txtChar1_TextChanged(object sender, EventArgs e)
         {
 

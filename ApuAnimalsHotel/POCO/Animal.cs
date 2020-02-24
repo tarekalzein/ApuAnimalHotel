@@ -15,7 +15,7 @@ namespace ApuAnimalsHotel.POCO
         private CategoryType category;
         private GenderType gender;
 
-
+        //empty constructor with some initialization
         public Animal()
         {
            
@@ -25,6 +25,7 @@ namespace ApuAnimalsHotel.POCO
              
         }
 
+        //Constructor to copy object.
         public Animal(Animal other)
         {
             this.name = other.name;
@@ -42,6 +43,7 @@ namespace ApuAnimalsHotel.POCO
             gender = Gender;
             
         }
+        //Getters and setters
         public string Name { get; set; }
         public double Age { get; set; }
         public CategoryType Category { get; set; }
@@ -50,7 +52,6 @@ namespace ApuAnimalsHotel.POCO
 
         public int Id { get; set; }
 
-        //TO DO: Complete ToString Method
         public override string ToString()
         {
             string strGender = Enum.GetName(typeof(GenderType), Gender);
