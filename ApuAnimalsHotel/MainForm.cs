@@ -16,6 +16,7 @@ namespace ApuAnimalsHotel
     {
         
         string MAMMAL_CHAR_LABEL = "Count of teeth";
+        string INSECT_CHAR_LABEL = "Count of Legs";
 
         private AnimalManager animalManager = null;
         public MainForm()
@@ -70,6 +71,8 @@ namespace ApuAnimalsHotel
         {
             //enable text box for species specific character.
             txtChar2.Visible = true;
+            txtChar1.Visible = true;
+
 
             var lbObjectSelection = lbObject.SelectedItem; //read animal object controller and rename label according to animal type.
 
@@ -77,18 +80,24 @@ namespace ApuAnimalsHotel
             {
                 case MammalSpecies.Dog:
                     lblChar2.Text = "Breed";
+                    lblChar1.Text = MAMMAL_CHAR_LABEL;
+
                     break;
 
                 case MammalSpecies.Cat:
                     lblChar2.Text = "Breed";
+                    lblChar1.Text = MAMMAL_CHAR_LABEL;
                     break;
 
                 case InsectSpecies.Bee:
                     lblChar2.Text = "Bee Species";
+                    lblChar1.Text = INSECT_CHAR_LABEL;
                     break;
 
                 case InsectSpecies.Butterfly:
                     lblChar2.Text = "Wings Color";
+                    lblChar1.Text = INSECT_CHAR_LABEL;
+
                     break;
             }
         }
@@ -105,11 +114,10 @@ namespace ApuAnimalsHotel
 
         private void lbCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lbCategory.SelectedItem != null) //to prevent crashes.
-            {
-                CategoryType categoryType = (CategoryType)lbCategory.SelectedItem;
-                CreateAnimalObjectList(categoryType); //create animal subcategories list.
-            }            
+            //if (lbCategory.SelectedItem != null) //to prevent crashes.
+            //{
+            CreateAnimalObjectList(); //create animal subcategories list.
+            //}            
 
         }
 
@@ -207,30 +215,52 @@ namespace ApuAnimalsHotel
             }
             animalManager.Add(animal);
         }
-
-        private void CreateAnimalObjectList(CategoryType categoryType)
+        private void CreateAnimalObjectList()
         {
             //Enable text boxes that are disabled by default.
-            txtChar1.Visible = true;
 
             lbObject.Items.Clear(); //prevent duplicating data in the list.
 
-            switch (categoryType)
+            if (cbListAll.Checked) 
             {
-                case CategoryType.Mammal:
-                    lblChar1.Text = MAMMAL_CHAR_LABEL;
-                    Array mammalsArray = typeof(MammalSpecies).GetEnumValues();
-                    foreach (MammalSpecies mammalSpecies in mammalsArray)
-                        lbObject.Items.Add(mammalSpecies);
-                    break;
+                lbCategory.Enabled = false;
+                Array mammalsArray = typeof(MammalSpecies).GetEnumValues();
+                foreach (MammalSpecies mammalSpecies in mammalsArray)
+                    lbObject.Items.Add(mammalSpecies);
+                Array insectsArray = typeof(InsectSpecies).GetEnumValues();
+                foreach (InsectSpecies insectSpecies in insectsArray)
+                    lbObject.Items.Add(insectSpecies);
 
-                case CategoryType.Insect:
-                    lblChar1.Text = "Count of Legs"; //TO DO Change text and make it constant string
-                    Array insectsArray = typeof(InsectSpecies).GetEnumValues();
-                    foreach (InsectSpecies insectSpecies in insectsArray)
-                        lbObject.Items.Add(insectSpecies);
-                    break;
+
             }
+
+            else
+            {
+                lbCategory.Enabled = true;
+                if (lbCategory.SelectedItem != null)//to prevent crashes
+                {
+                    //{
+                    CategoryType categoryType = (CategoryType)lbCategory.SelectedItem;
+
+
+                    switch (categoryType)
+                    {
+                        case CategoryType.Mammal:                           
+                            Array mammalsArray = typeof(MammalSpecies).GetEnumValues();
+                            foreach (MammalSpecies mammalSpecies in mammalsArray)
+                                lbObject.Items.Add(mammalSpecies);
+                            break;
+
+                        case CategoryType.Insect:
+                            Array insectsArray = typeof(InsectSpecies).GetEnumValues();
+                            foreach (InsectSpecies insectSpecies in insectsArray)
+                                lbObject.Items.Add(insectSpecies);
+                            break;
+                    }
+                } 
+                   
+            }
+            
         }
         //Method to validate input in Name field
         private string CheckName(out bool success)
@@ -310,6 +340,13 @@ namespace ApuAnimalsHotel
             CheckCharacteristic_2(out char2_ok);
 
             return nameOk && animalAgeOk && char1_ok && char2_ok;
+        }
+
+        private void cbListAll_CheckedChanged(object sender, EventArgs e)
+        {
+            CreateAnimalObjectList();
+            lbCategory.ClearSelected();
+
         }
     }
 }

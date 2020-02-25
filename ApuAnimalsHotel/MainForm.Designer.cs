@@ -49,12 +49,12 @@
             this.txtAge = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.lbResults = new System.Windows.Forms.ListBox();
-            this.lb_id = new System.Windows.Forms.Label();
-            this.lbl_name = new System.Windows.Forms.Label();
-            this.lbl_age = new System.Windows.Forms.Label();
-            this.lbl_gender = new System.Windows.Forms.Label();
             this.lbl_special = new System.Windows.Forms.Label();
+            this.lbl_gender = new System.Windows.Forms.Label();
+            this.lbl_age = new System.Windows.Forms.Label();
+            this.lbl_name = new System.Windows.Forms.Label();
+            this.lb_id = new System.Windows.Forms.Label();
+            this.lbResults = new System.Windows.Forms.ListBox();
             this.grpbx1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgAnimal)).BeginInit();
             this.grpbxSpecialChar.SuspendLayout();
@@ -97,6 +97,7 @@
             this.cbListAll.TabIndex = 14;
             this.cbListAll.Text = "List all animals";
             this.cbListAll.UseVisualStyleBackColor = true;
+            this.cbListAll.CheckedChanged += new System.EventHandler(this.cbListAll_CheckedChanged);
             // 
             // btnLoadImage
             // 
@@ -289,40 +290,14 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "List of registered animals";
             // 
-            // lbResults
+            // lbl_special
             // 
-            this.lbResults.FormattingEnabled = true;
-            this.lbResults.Location = new System.Drawing.Point(6, 33);
-            this.lbResults.Name = "lbResults";
-            this.lbResults.Size = new System.Drawing.Size(576, 147);
-            this.lbResults.TabIndex = 0;
-            // 
-            // lb_id
-            // 
-            this.lb_id.AutoSize = true;
-            this.lb_id.Location = new System.Drawing.Point(10, 20);
-            this.lb_id.Name = "lb_id";
-            this.lb_id.Size = new System.Drawing.Size(18, 13);
-            this.lb_id.TabIndex = 1;
-            this.lb_id.Text = "ID";
-            // 
-            // lbl_name
-            // 
-            this.lbl_name.AutoSize = true;
-            this.lbl_name.Location = new System.Drawing.Point(49, 19);
-            this.lbl_name.Name = "lbl_name";
-            this.lbl_name.Size = new System.Drawing.Size(34, 13);
-            this.lbl_name.TabIndex = 2;
-            this.lbl_name.Text = "Name";
-            // 
-            // lbl_age
-            // 
-            this.lbl_age.AutoSize = true;
-            this.lbl_age.Location = new System.Drawing.Point(126, 19);
-            this.lbl_age.Name = "lbl_age";
-            this.lbl_age.Size = new System.Drawing.Size(26, 13);
-            this.lbl_age.TabIndex = 3;
-            this.lbl_age.Text = "Age";
+            this.lbl_special.AutoSize = true;
+            this.lbl_special.Location = new System.Drawing.Point(338, 20);
+            this.lbl_special.Name = "lbl_special";
+            this.lbl_special.Size = new System.Drawing.Size(96, 13);
+            this.lbl_special.TabIndex = 5;
+            this.lbl_special.Text = "Special Characters";
             // 
             // lbl_gender
             // 
@@ -333,14 +308,40 @@
             this.lbl_gender.TabIndex = 4;
             this.lbl_gender.Text = "Gender";
             // 
-            // lbl_special
+            // lbl_age
             // 
-            this.lbl_special.AutoSize = true;
-            this.lbl_special.Location = new System.Drawing.Point(338, 20);
-            this.lbl_special.Name = "lbl_special";
-            this.lbl_special.Size = new System.Drawing.Size(96, 13);
-            this.lbl_special.TabIndex = 5;
-            this.lbl_special.Text = "Special Characters";
+            this.lbl_age.AutoSize = true;
+            this.lbl_age.Location = new System.Drawing.Point(126, 19);
+            this.lbl_age.Name = "lbl_age";
+            this.lbl_age.Size = new System.Drawing.Size(26, 13);
+            this.lbl_age.TabIndex = 3;
+            this.lbl_age.Text = "Age";
+            // 
+            // lbl_name
+            // 
+            this.lbl_name.AutoSize = true;
+            this.lbl_name.Location = new System.Drawing.Point(49, 19);
+            this.lbl_name.Name = "lbl_name";
+            this.lbl_name.Size = new System.Drawing.Size(34, 13);
+            this.lbl_name.TabIndex = 2;
+            this.lbl_name.Text = "Name";
+            // 
+            // lb_id
+            // 
+            this.lb_id.AutoSize = true;
+            this.lb_id.Location = new System.Drawing.Point(10, 20);
+            this.lb_id.Name = "lb_id";
+            this.lb_id.Size = new System.Drawing.Size(18, 13);
+            this.lb_id.TabIndex = 1;
+            this.lb_id.Text = "ID";
+            // 
+            // lbResults
+            // 
+            this.lbResults.FormattingEnabled = true;
+            this.lbResults.Location = new System.Drawing.Point(6, 33);
+            this.lbResults.Name = "lbResults";
+            this.lbResults.Size = new System.Drawing.Size(576, 147);
+            this.lbResults.TabIndex = 0;
             // 
             // MainForm
             // 
