@@ -11,7 +11,7 @@ namespace ApuAnimalsHotel.POCO
     {
         private string breed;
 
-        public Dog():base()
+        public Dog() : base()
         {
 
         }
@@ -36,11 +36,11 @@ namespace ApuAnimalsHotel.POCO
             this.Id = other.Id;
         }
 
-        //public Dog(string breed,int teethCount, string name, double age,CategoryType category,GenderType gender ) :
-        //    base (teethCount,name,age, category,gender)
-        //{
-        //    breed= Breed;
-        //}
+        public Dog(string breed, int teethCount, string name, double age, CategoryType category, GenderType gender) :
+            base(teethCount, name, age, category, gender)
+        {
+            breed = Breed;
+        }
         public string Breed 
         {
             get { return breed; }

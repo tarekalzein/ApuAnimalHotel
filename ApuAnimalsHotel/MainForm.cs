@@ -41,13 +41,13 @@ namespace ApuAnimalsHotel
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Animal animal;
+            Animal animal =new Animal();
 
-            bool ok = ReadInput(out animal); //Read the general input (name, age and gender).
-            if (ok)
-            {                
-                CategoryType categoryType = (CategoryType)lbCategory.SelectedItem;
-                CreateAnimalData(categoryType, animal);                
+            bool success = CheckInputs();
+            if (success)
+            {
+                string animalObjType = lbObject.SelectedItem.ToString();
+                CreateAnimalInstance(animalObjType,animal);
             }
             UpdateResults(); //update results in the result list.
         }
@@ -145,75 +145,69 @@ namespace ApuAnimalsHotel
             cmbGender.SelectedIndex = (int)GenderType.Unknown; //set default value to Unknown
         }
 
-        private void CreateAnimalData(CategoryType categoryType, Animal animal)
+        //This method is the core method to create the animal object.
+        private void CreateAnimalInstance(string animalObjType, Animal animal)
         {
-            if (categoryType == CategoryType.Mammal)
+            //All inputs are validated before this step. assign variable to each input to use later in animal obj creation.
+            string animalName= txtName.Text;
+            double animalAge= double.Parse(txtAge.Text);
+            string char_1 = txtChar1.Text;
+            string char_2=txtChar2.Text;
+            GenderType animalGender = (GenderType)cmbGender.SelectedItem;
+
+            switch (animalObjType)
             {
-                bool char1Ok = false;
-                CheckCharacteristic_1(out char1Ok); //check if input is correct and continue if true.
-                if (char1Ok)
-                {
-                    Mammal mammal = new Mammal(animal);
-                    mammal.TeethCount = int.Parse(CheckCharacteristic_1(out char1Ok));
-                    switch ((MammalSpecies)lbObject.SelectedIndex)
+                case "Dog":
+                    animal = new Dog
                     {
-                        case MammalSpecies.Dog:
-                            Dog dog = new Dog(mammal);
-                            bool char2Ok = false;
-                            string breed = CheckCharacteristic_2(out char2Ok); 
-                            if (char2Ok)
-                            {
-                                dog.Breed = breed;
-                                animalManager.Add(dog);
-                            }
-                            break;
-                        case MammalSpecies.Cat:
-                            Cat cat = new Cat(mammal);
-                            char2Ok = false;
-                            CheckCharacteristic_2(out char2Ok);
-                            if (char2Ok)
-                            {
-                                cat.Breed = CheckCharacteristic_2(out char2Ok);
-                                animalManager.Add(cat);
-                            }
-                            break;
-                    }
-                }
-            }
-            if (categoryType == CategoryType.Insect)
-            {
-                bool char1Ok = false;
-                CheckCharacteristic_1(out char1Ok);
-                if (char1Ok)
-                {
-                    Insect insect = new Insect(animal);
-                    insect.CountOfLegs = int.Parse(CheckCharacteristic_1(out char1Ok));
-                    switch ((InsectSpecies)lbObject.SelectedIndex)
+                        Age = animalAge,
+                        Name = animalName,
+                        TeethCount = int.Parse(char_1),
+                        Category=CategoryType.Mammal,
+                        Breed=char_2,
+                        Gender=animalGender
+                    };
+                    break;
+
+                case "Cat":
+                    animal = new Cat
                     {
-                        case InsectSpecies.Bee:
-                            Bee bee = new Bee(insect);
-                            bool char2Ok = false;
-                            CheckCharacteristic_2(out char2Ok);
-                            if (char2Ok)
-                            {
-                                bee.BeeSpecies = CheckCharacteristic_2(out char2Ok);
-                                animalManager.Add(bee);
-                            }
-                            break;
-                        case InsectSpecies.Butterfly:
-                            Butterfly butterfly = new Butterfly(insect);
-                            char2Ok = false;
-                            CheckCharacteristic_2(out char2Ok);
-                            if (char2Ok)
-                            {
-                                butterfly.WingColor = CheckCharacteristic_2(out char2Ok);
-                                animalManager.Add(butterfly);
-                            }
-                            break;
-                    }
-                }
+                        Age = animalAge,
+                        Name = animalName,
+                        TeethCount = int.Parse(char_1),
+                        Category = CategoryType.Mammal,
+                        Breed = char_2,
+                        Gender = animalGender
+                    };                   
+                    break;
+
+                case "Bee":
+                    animal = new Bee
+                    {
+                        Age = animalAge,
+                        Name = animalName,
+                        Category = CategoryType.Insect,
+                        CountOfLegs = int.Parse(char_1),
+                        BeeSpecies = char_2,
+                        Gender = animalGender,
+                    };
+                    break;
+
+                case "Butterfly":
+                    animal = new Butterfly
+                    {
+                        Age = animalAge,
+                        Name = animalName,
+                        Category = CategoryType.Insect,
+                        CountOfLegs = int.Parse(char_1),
+                        WingColor = char_2,
+                        Gender = animalGender,
+                    };
+                    break;
             }
+            animalManager.Add(animal);
         }
+
         private void CreateAnimalObjectList(CategoryType categoryType)
         {
             //Enable text boxes that are disabled by default.
@@ -247,9 +241,7 @@ namespace ApuAnimalsHotel
             {
                 MessageBox.Show("Please Check the name field");
             }
-
             return name;
-
         }
 
         //Method to validate input in Age field
@@ -265,7 +257,6 @@ namespace ApuAnimalsHotel
             else
             {
                 MessageBox.Show("Age is not valid");
-
             }
             return age;
         }
@@ -280,13 +271,18 @@ namespace ApuAnimalsHotel
             {
                 MessageBox.Show("Please fill the Animal's special character");
             }
+
+            success = int.TryParse(char1, out _);// this is just to check if it is int or not.
+            if (!success)
+            {
+                MessageBox.Show("Only numbers are allowed in animal's special character");
+            }
             return char1;
         }
 
         //Method to validate input in Species special character(characeter 1) field
         private string CheckCharacteristic_2(out bool success)
         {
-
             string char2 = txtChar2.Text;
             success = (!String.IsNullOrEmpty(char2));
             if (!success)
@@ -296,29 +292,25 @@ namespace ApuAnimalsHotel
             return char2;
         }
 
-        private bool ReadInput(out Animal animal)
-        {
-            animal = new Animal();
-
-            // process Age
-            bool ageOk = false;
-            animal.Age = CheckAge(out ageOk);
-
-            bool nameOk = false;
-            animal.Name = CheckName(out nameOk);
-
-            animal.Gender = (GenderType)cmbGender.SelectedItem;
-
-            return ageOk && nameOk;
-        }
-
- 
         private void txtChar1_TextChanged(object sender, EventArgs e)
         {
+        }
 
+        //Method that returns bool true if all checks pass evaulation.
+        private bool CheckInputs()
+        {
+            bool nameOk = false ;
+            bool animalAgeOk = false;
+            bool char1_ok = false;
+            bool char2_ok = false;
+
+            CheckName(out nameOk);
+            CheckAge(out animalAgeOk);
+            CheckCharacteristic_1(out char1_ok);
+            CheckCharacteristic_2(out char2_ok);
+
+            return nameOk && animalAgeOk && char1_ok && char2_ok;
         }
     }
-
-
 }
 

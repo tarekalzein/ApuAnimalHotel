@@ -26,11 +26,11 @@ namespace ApuAnimalsHotel.POCO
             this.TeethCount = other.TeethCount;
             Category = CategoryType.Mammal;
         }
-        //public Mammal(int teethCount, string name, double age, CategoryType category, GenderType gender) : base(name, age,category,gender)
-        //{
-        //    teethCount = TeethCount;
-        //    category = CategoryType.Mammal;
-        //}
+        public Mammal(int teethCount, string name, double age, CategoryType category, GenderType gender) : base(name, age, category, gender)
+        {
+            teethCount = TeethCount;
+            category = CategoryType.Mammal;
+        }
 
         public Mammal (Animal other)
         {
@@ -57,7 +57,7 @@ namespace ApuAnimalsHotel.POCO
 
         public override string ToString()
         {            
-            return String.Format("{0, -25} {1, -12}", base.ToString(), ("Count of Legs: " + TeethCount + ", "));
+            return String.Format("{0, -25} {1, -12}", base.ToString(), ("Count of teeth: " + TeethCount + ", "));
         }
     }
 }
