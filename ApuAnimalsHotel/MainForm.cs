@@ -65,6 +65,24 @@ namespace ApuAnimalsHotel
 
         private void button2_Click(object sender, EventArgs e)
         {
+            string imageLocation = "";
+
+            try
+            {
+                OpenFileDialog dialog = new OpenFileDialog();
+                dialog.Filter = "jpg files(*.jpg)|*.jpg| PNG files(*.png)|*.png";
+
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    imageLocation = dialog.FileName;
+                    imgAnimal.ImageLocation = imageLocation;
+                }
+            }
+            catch(Exception)
+            {
+
+            }
+           
         }
 
         private void lbObject_SelectedIndexChanged(object sender, EventArgs e)

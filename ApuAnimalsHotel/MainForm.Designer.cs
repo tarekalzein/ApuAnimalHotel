@@ -115,6 +115,7 @@
             this.imgAnimal.Location = new System.Drawing.Point(469, 78);
             this.imgAnimal.Name = "imgAnimal";
             this.imgAnimal.Size = new System.Drawing.Size(100, 126);
+            this.imgAnimal.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imgAnimal.TabIndex = 12;
             this.imgAnimal.TabStop = false;
             // 
