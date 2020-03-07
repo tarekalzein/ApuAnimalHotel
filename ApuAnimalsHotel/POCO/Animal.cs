@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ApuAnimalsHotel.Enums;
+using ApuAnimalsHotel.Interfaces;
 
 namespace ApuAnimalsHotel.POCO
 {
-    class Animal
+    abstract class Animal : IAnimal
     {
         private string name;
         private int id;
@@ -51,6 +52,16 @@ namespace ApuAnimalsHotel.POCO
         public GenderType Gender { get; set; }
 
         public int Id { get; set; }
+        public int ID { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public abstract EaterType GetEaterType();
+
+        public abstract FoodSchedule GetFoodSchedule();
+
+
+        public abstract string GetSpecies();
+
+
 
         public override string ToString()
         {

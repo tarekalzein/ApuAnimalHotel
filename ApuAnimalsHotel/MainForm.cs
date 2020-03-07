@@ -42,7 +42,8 @@ namespace ApuAnimalsHotel
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Animal animal =new Animal();
+            //Animal animal =new Animal(); //commented out: Can't instantiate abstract classes
+            Animal animal = null; //Null object pattern, just to be able to use the reference in animal creation later.
 
             bool success = CheckInputs();
             if (success)
@@ -181,6 +182,7 @@ namespace ApuAnimalsHotel
             string char_2=txtChar2.Text;
             GenderType animalGender = (GenderType)cmbGender.SelectedItem;
 
+            //Find out which animal category is to be created.
             switch (animalObjType)
             {
                 case "Dog":
@@ -366,6 +368,26 @@ namespace ApuAnimalsHotel
             lbCategory.ClearSelected();
 
         }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbResults_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lbFoodSchedule.Items.Clear();
+            lbEaterType.Items.Clear();
+
+            //Get the animal object from animal manager in the selected index.
+            Animal animal = animalManager.GetElementAtPosition(lbResults.SelectedIndex);  
+            lbEaterType.Items.Add(animal.GetEaterType());// Put the Eater type in the eater type label
+
+            for (int i = 0; i < animal.GetFoodSchedule().Count; i++)
+            {
+                string test = "["+(i+1)+"] " + animal.GetFoodSchedule().GetFoodSchedule(i);
+                lbFoodSchedule.Items.Add(test);
+            }                        
+        }
     }
 }
-

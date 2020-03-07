@@ -48,9 +48,11 @@
   <ItemGroup>
     <Compile Include="AnimalManager.cs" />
     <Compile Include="Enums\Category.cs" />
+    <Compile Include="Enums\EaterType.cs" />
     <Compile Include="Enums\GenderType.cs" />
     <Compile Include="Enums\InsectSpecies.cs" />
     <Compile Include="Enums\MammalSpecies.cs" />
+    <Compile Include="Interfaces\IAnimal.cs" />
     <Compile Include="POCO\Animal.cs" />
     <Compile Include="POCO\Bee.cs">
       <DependentUpon>Insect.cs</DependentUpon>
@@ -64,6 +66,7 @@
     <Compile Include="POCO\Dog.cs">
       <DependentUpon>Mammal.cs</DependentUpon>
     </Compile>
+    <Compile Include="FoodSchedule.cs" />
     <Compile Include="POCO\Insect.cs">
       <DependentUpon>Animal.cs</DependentUpon>
     </Compile>

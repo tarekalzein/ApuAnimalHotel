@@ -55,10 +55,15 @@
             this.lbl_name = new System.Windows.Forms.Label();
             this.lb_id = new System.Windows.Forms.Label();
             this.lbResults = new System.Windows.Forms.ListBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lbEaterType = new System.Windows.Forms.ListBox();
+            this.lbFoodSchedule = new System.Windows.Forms.ListBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.grpbx1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgAnimal)).BeginInit();
             this.grpbxSpecialChar.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpbx1
@@ -286,10 +291,11 @@
             this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.groupBox2.Location = new System.Drawing.Point(12, 342);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(588, 185);
+            this.groupBox2.Size = new System.Drawing.Size(961, 185);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "List of registered animals";
+            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // lbl_special
             // 
@@ -341,14 +347,53 @@
             this.lbResults.FormattingEnabled = true;
             this.lbResults.Location = new System.Drawing.Point(6, 33);
             this.lbResults.Name = "lbResults";
-            this.lbResults.Size = new System.Drawing.Size(576, 147);
+            this.lbResults.Size = new System.Drawing.Size(949, 147);
             this.lbResults.TabIndex = 0;
+            this.lbResults.SelectedIndexChanged += new System.EventHandler(this.lbResults_SelectedIndexChanged);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lbEaterType);
+            this.groupBox1.Controls.Add(this.lbFoodSchedule);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Location = new System.Drawing.Point(621, 23);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(352, 313);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Feeding Schedule";
+            // 
+            // lbEaterType
+            // 
+            this.lbEaterType.FormattingEnabled = true;
+            this.lbEaterType.Location = new System.Drawing.Point(120, 27);
+            this.lbEaterType.Name = "lbEaterType";
+            this.lbEaterType.Size = new System.Drawing.Size(215, 17);
+            this.lbEaterType.TabIndex = 2;
+            // 
+            // lbFoodSchedule
+            // 
+            this.lbFoodSchedule.FormattingEnabled = true;
+            this.lbFoodSchedule.Location = new System.Drawing.Point(10, 50);
+            this.lbFoodSchedule.Name = "lbFoodSchedule";
+            this.lbFoodSchedule.Size = new System.Drawing.Size(325, 251);
+            this.lbFoodSchedule.TabIndex = 1;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 27);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(60, 13);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Eater Type";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(622, 539);
+            this.ClientSize = new System.Drawing.Size(985, 539);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.grpbx1);
             this.Name = "MainForm";
@@ -362,6 +407,8 @@
             this.grpbxSpecialChar.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -395,5 +442,9 @@
         private System.Windows.Forms.Label lbl_age;
         private System.Windows.Forms.Label lbl_name;
         private System.Windows.Forms.Label lb_id;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ListBox lbEaterType;
+        private System.Windows.Forms.ListBox lbFoodSchedule;
     }
 }

@@ -10,10 +10,12 @@ namespace ApuAnimalsHotel.POCO
     class Bee : Insect
     {
         private string beeSpecies;
+        private FoodSchedule foodSchedule;
 
-        public Bee():base()
+        public Bee() : base()
         {
-
+            foodSchedule = new FoodSchedule();
+            AddTestItems();
         }
         public Bee(Bee other)
         {
@@ -24,6 +26,7 @@ namespace ApuAnimalsHotel.POCO
             this.CountOfLegs = other.CountOfLegs;
             this.beeSpecies = other.beeSpecies;
             this.Id = other.Id;
+            this.foodSchedule = other.GetFoodSchedule();
 
         }
         public Bee(Insect other)
@@ -46,14 +49,37 @@ namespace ApuAnimalsHotel.POCO
             get { return beeSpecies; }
             set
             {
-                if (!String.IsNullOrEmpty(value))                    
+                if (!String.IsNullOrEmpty(value))
                     beeSpecies = value;
             }
         }
 
+        public override EaterType GetEaterType()
+        {
+            return EaterType.Omnivorous;
+        }
+
+        public override FoodSchedule GetFoodSchedule()
+        {
+            return foodSchedule;
+        }
+
+        public override string GetSpecies()
+        {
+            return "Bee";
+        }
+
         public override string ToString()
-        {            
-            return String.Format("{0, -12} {1,-12}", base.ToString(), "Bee Species: "+BeeSpecies.ToUpper());
+        {
+            return String.Format("{0, -12} {1,-12}", base.ToString(), "Bee Species: " + BeeSpecies.ToUpper());
+        }
+
+        private void AddTestItems()
+        {
+            foodSchedule.AddFoodScheduleItem("Morning: Acacia flowers!");
+            foodSchedule.AddFoodScheduleItem("Lunch: Fruit nectar!");
+            foodSchedule.AddFoodScheduleItem("3PM: Frozen treats");
+            foodSchedule.AddFoodScheduleItem("Evenings: Pollen");
         }
     }
 }

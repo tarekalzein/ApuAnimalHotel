@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ApuAnimalsHotel.Enums;
+using ApuAnimalsHotel.Interfaces;
 
 namespace ApuAnimalsHotel.POCO
 {
-    class Insect : Animal
+    abstract class Insect : Animal
     {
         private int countOfLegs;
 

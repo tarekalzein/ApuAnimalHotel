@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApuAnimalsHotel.Enums;
 
 namespace ApuAnimalsHotel.POCO
 {
     class Butterfly : Insect
     {
         private string wingColor;
+        private FoodSchedule foodSchedule;
+
 
         public Butterfly(): base()
         {
-
+            foodSchedule = new FoodSchedule();
+            AddTestItems();
         }
 
         public Butterfly(Butterfly other)
@@ -24,6 +28,7 @@ namespace ApuAnimalsHotel.POCO
             this.CountOfLegs = other.CountOfLegs;
             this.wingColor = other.wingColor;
             this.Id = other.Id;
+            this.foodSchedule = other.GetFoodSchedule();
         }
 
         public Butterfly(Insect other)
@@ -46,10 +51,33 @@ namespace ApuAnimalsHotel.POCO
                     wingColor = value;
             }
         }
+
+        public override EaterType GetEaterType()
+        {
+            return EaterType.Herbivore;
+        }
+
+        public override FoodSchedule GetFoodSchedule()
+        {
+            return foodSchedule;
+        }
+
+        public override string GetSpecies()
+        {
+            return "Butterfly";
+        }
         public override string ToString()
         {
             return String.Format("{0, -12} {1,-12}", base.ToString(), " Wings Color is: " + WingColor);
 
+        }
+
+        private void AddTestItems()
+        {
+            foodSchedule.AddFoodScheduleItem("Morning: flowers!");
+            foodSchedule.AddFoodScheduleItem("Lunch: Leaves!");
+            foodSchedule.AddFoodScheduleItem("3PM: Fruit juice");
+            foodSchedule.AddFoodScheduleItem("Evenings: Pollen");
         }
     }
 }

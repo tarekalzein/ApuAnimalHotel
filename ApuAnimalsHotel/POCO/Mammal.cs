@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using ApuAnimalsHotel.POCO;
 using ApuAnimalsHotel.Enums;
+using ApuAnimalsHotel.Interfaces;
 
 namespace ApuAnimalsHotel.POCO
 {
-    class Mammal : Animal
+    abstract class Mammal : Animal
     {
         private int teethCount;
         public Mammal(): base()
@@ -58,6 +59,7 @@ namespace ApuAnimalsHotel.POCO
         public override string ToString()
         {            
             return String.Format("{0, -25} {1, -12}", base.ToString(), ("Count of teeth: " + TeethCount + ", "));
-        }
+        }        
+
     }
 }

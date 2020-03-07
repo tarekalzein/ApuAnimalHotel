@@ -10,9 +10,13 @@ namespace ApuAnimalsHotel.POCO
     class Cat : Mammal
     {
         private string breed;
+        private FoodSchedule foodSchedule;
+
 
         public Cat() : base()
         {
+            foodSchedule = new FoodSchedule();
+            AddTestItems();
 
         }
         public Cat(Cat other)
@@ -24,7 +28,10 @@ namespace ApuAnimalsHotel.POCO
             this.TeethCount = other.TeethCount;
             this.Breed = other.breed;
             this.Id = other.Id;
+            this.foodSchedule = other.GetFoodSchedule();
         }
+
+        //Not used - Constructor copier that takes another mammal and copy properties to dog object
         public Cat(Mammal other)
         {
             this.Name = other.Name;
@@ -49,6 +56,30 @@ namespace ApuAnimalsHotel.POCO
                 if (!String.IsNullOrEmpty(value)) { breed = value; }
             }
         }
+
+        public override EaterType GetEaterType()
+        {
+            return EaterType.Carnivore;
+        }
+
+        public override FoodSchedule GetFoodSchedule()
+        {
+            return foodSchedule;
+        }
+
+        public override string GetSpecies()
+        {
+            return "Cat";
+        }
+
+        private void AddTestItems()
+        {
+            foodSchedule.AddFoodScheduleItem("Morning: wet meat!");
+            foodSchedule.AddFoodScheduleItem("Lunch: dog food and water!");
+            foodSchedule.AddFoodScheduleItem("3PM: Treats");
+            foodSchedule.AddFoodScheduleItem("Evenings: Leftovers");
+        }
+
         public override string ToString()
         {
             return String.Format("{0, -12} {1,-12}", base.ToString(), " the breed is: " + Breed);
