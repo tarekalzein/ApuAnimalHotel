@@ -9,15 +9,20 @@ using ApuAnimalsHotel.Interfaces;
 
 namespace ApuAnimalsHotel.POCO
 {
+    /// <summary>
+    /// Abstract class that inherits the abstract class Animal and the interface IAnimal.
+    /// In addition to the properties in Animal, it has special property TeethCount. 
+    /// </summary>
     abstract class Mammal : Animal
     {
         private int teethCount;
+        //Default constructor
         public Mammal(): base()
         {
             Category = CategoryType.Mammal;
             teethCount = 0;
         }
-
+        //Not userd - Constructor to copy  object.
         public Mammal(Mammal other) 
         {
             this.Name = other.Name;

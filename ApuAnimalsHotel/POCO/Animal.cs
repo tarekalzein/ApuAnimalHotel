@@ -58,10 +58,7 @@ namespace ApuAnimalsHotel.POCO
 
         public abstract FoodSchedule GetFoodSchedule();
 
-
         public abstract string GetSpecies();
-
-
 
         public override string ToString()
         {

@@ -7,15 +7,19 @@ using ApuAnimalsHotel.Enums;
 
 namespace ApuAnimalsHotel.POCO
 {
+    /// <summary>
+    /// A Class for the creation of Dog instance. It inherirts the properties from Animal and mammal, it has special property breed. 
+    /// </summary>
     class Dog : Mammal
     {
         private string breed;
         private FoodSchedule foodSchedule;
         
-
+        //Default constructor
         public Dog() : base()
         {
             foodSchedule= new FoodSchedule();
+
 
             AddTestItems();
         }
@@ -48,6 +52,7 @@ namespace ApuAnimalsHotel.POCO
         {
             breed = Breed;
         }
+
         public string Breed 
         {
             get { return breed; }
@@ -62,21 +67,35 @@ namespace ApuAnimalsHotel.POCO
             return String.Format("{0, -12} {1,-12}", base.ToString(), " the breed is: " + Breed);
         }
 
+        /// <summary>
+        /// Method to fetch pre-configured eater type for dogs.
+        /// </summary>
+        /// <returns></returns>
         public override EaterType GetEaterType()
         {
             return EaterType.Carnivore;
         }
 
+        /// <summary>
+        /// Method to fetch the instance of foodschedule created for this dog object.
+        /// </summary>
+        /// <returns> FoodSchedule instance created for this animal</returns>
         public override FoodSchedule GetFoodSchedule()
         {
             return foodSchedule;
         }
 
+        /// <summary>
+        /// Method to fetch hard-coded species type.
+        /// </summary>
+        /// <returns></returns>
         public override string GetSpecies()
         {
             return "Dog";
         }
-
+        /// <summary>
+        /// This method is to create test data.
+        /// </summary>
         private void AddTestItems()
         {
             foodSchedule.AddFoodScheduleItem("Morning: wet meat!");

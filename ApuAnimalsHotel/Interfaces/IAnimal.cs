@@ -8,6 +8,9 @@ using ApuAnimalsHotel.Enums;
 
 namespace ApuAnimalsHotel.Interfaces
 {
+    /// <summary>
+    /// Interface that sets the rules for all subclasses derived from the animal class. 
+    /// </summary>
     interface IAnimal
     {
         GenderType Gender { get; set; }
