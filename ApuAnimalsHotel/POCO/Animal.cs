@@ -52,7 +52,6 @@ namespace ApuAnimalsHotel.POCO
         public GenderType Gender { get; set; }
 
         public int Id { get; set; }
-        public int ID { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public abstract EaterType GetEaterType();
 

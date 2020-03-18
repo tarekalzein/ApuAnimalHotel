@@ -14,7 +14,7 @@ namespace ApuAnimalsHotel.Interfaces
     interface IAnimal
     {
         GenderType Gender { get; set; }
-        int ID { get; set; }
+        int Id { get; set; }
         string Name { get; set; }
 
         EaterType GetEaterType();

@@ -32,7 +32,7 @@ namespace ApuAnimalsHotel
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -52,6 +52,60 @@ namespace ApuAnimalsHotel
                 CreateAnimalInstance(animalObjType,animal);
             }
             UpdateResults(); //update results in the result list.
+
+            lvAnimalList.Items.Clear();
+
+            for (int index = 0; index < animalManager.ElementCount; index++)
+            {
+                animal = animalManager.GetElementAtPosition(index);  //Get the index of the animal in the list.
+                string ch1="-";
+                string ch2="-";
+
+                switch (animal) 
+                {
+                    case Dog dog:
+                        dog = (Dog)animal;
+                        ch1 = dog.TeethCount.ToString();
+                        ch2 = dog.Breed;
+                        break;
+
+                    case Cat cat:
+                        cat = (Cat)animal;
+                        ch1 = cat.TeethCount.ToString();
+                        ch2 = cat.Breed;
+                        break;
+
+                    case Bee bee:
+                        bee = (Bee)animal;
+                        ch1 =bee.CountOfLegs.ToString();
+                        ch2 = bee.BeeSpecies;
+                        break;
+
+                    case Butterfly butterfly:
+                        butterfly = (Butterfly)animal;
+                        ch1 = butterfly.CountOfLegs.ToString();
+                        ch2 = butterfly.WingColor;
+                        break;
+                }
+                
+              
+                var row = new string[]
+                {
+                     animal.Id.ToString(),
+                     animal.Name,
+                     animal.Age.ToString(),
+                     animal.Gender.ToString(),
+                     (ch1+", "+ch2)
+                     
+                };
+                var lvitem = new ListViewItem(row);
+                lvitem.Tag = animal;
+
+                lvAnimalList.Items.Add(lvitem);
+
+
+
+            }
         }
 
         private void UpdateResults()
@@ -388,6 +442,31 @@ namespace ApuAnimalsHotel
                 string test = "["+(i+1)+"] " + animal.GetFoodSchedule().GetFoodSchedule(i);
                 lbFoodSchedule.Items.Add(test);
             }                        
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lbFoodSchedule.Items.Clear();
+            lbEaterType.Items.Clear();
+
+            //Get the animal object from animal manager in the selected index.
+            if(lvAnimalList.SelectedItems.Count>0) // This if statement is to prevent nullpointerexception on listview index change. when we change selection this will raise the selecedindexchanged twice causing error.
+            {
+                Animal animal = animalManager.GetElementAtPosition(lvAnimalList.SelectedItems[0].Index);
+                lbEaterType.Items.Add(animal.GetEaterType());// Put the Eater type in the eater type label
+
+                for (int i = 0; i < animal.GetFoodSchedule().Count; i++)
+                {
+                    string test = "[" + (i + 1) + "] " + animal.GetFoodSchedule().GetFoodSchedule(i);
+                    lbFoodSchedule.Items.Add(test);
+                }
+            }
+            else
+            {
+                return;
+            }
+            
+
         }
     }
 }

@@ -59,6 +59,12 @@
             this.lbEaterType = new System.Windows.Forms.ListBox();
             this.lbFoodSchedule = new System.Windows.Forms.ListBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.lvAnimalList = new System.Windows.Forms.ListView();
+            this.chID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chAge = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chGender = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chSpecialCharacters = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.grpbx1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgAnimal)).BeginInit();
             this.grpbxSpecialChar.SuspendLayout();
@@ -282,6 +288,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.lvAnimalList);
             this.groupBox2.Controls.Add(this.lbl_special);
             this.groupBox2.Controls.Add(this.lbl_gender);
             this.groupBox2.Controls.Add(this.lbl_age);
@@ -347,7 +354,7 @@
             this.lbResults.FormattingEnabled = true;
             this.lbResults.Location = new System.Drawing.Point(6, 33);
             this.lbResults.Name = "lbResults";
-            this.lbResults.Size = new System.Drawing.Size(949, 147);
+            this.lbResults.Size = new System.Drawing.Size(447, 147);
             this.lbResults.TabIndex = 0;
             this.lbResults.SelectedIndexChanged += new System.EventHandler(this.lbResults_SelectedIndexChanged);
             // 
@@ -387,6 +394,49 @@
             this.label6.Size = new System.Drawing.Size(60, 13);
             this.label6.TabIndex = 0;
             this.label6.Text = "Eater Type";
+            // 
+            // lvAnimalList
+            // 
+            this.lvAnimalList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.chID,
+            this.chName,
+            this.chAge,
+            this.chGender,
+            this.chSpecialCharacters});
+            this.lvAnimalList.FullRowSelect = true;
+            this.lvAnimalList.HideSelection = false;
+            this.lvAnimalList.Location = new System.Drawing.Point(478, 33);
+            this.lvAnimalList.MultiSelect = false;
+            this.lvAnimalList.Name = "lvAnimalList";
+            this.lvAnimalList.Size = new System.Drawing.Size(477, 152);
+            this.lvAnimalList.TabIndex = 6;
+            this.lvAnimalList.UseCompatibleStateImageBehavior = false;
+            this.lvAnimalList.View = System.Windows.Forms.View.Details;
+            this.lvAnimalList.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            // 
+            // chID
+            // 
+            this.chID.Text = "ID";
+            this.chID.Width = 30;
+            // 
+            // chName
+            // 
+            this.chName.Text = "Name";
+            this.chName.Width = 100;
+            // 
+            // chAge
+            // 
+            this.chAge.Text = "Age";
+            this.chAge.Width = 50;
+            // 
+            // chGender
+            // 
+            this.chGender.Text = "Gender";
+            // 
+            // chSpecialCharacters
+            // 
+            this.chSpecialCharacters.Text = "Special Characters";
+            this.chSpecialCharacters.Width = 210;
             // 
             // MainForm
             // 
@@ -446,5 +496,11 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ListBox lbEaterType;
         private System.Windows.Forms.ListBox lbFoodSchedule;
+        private System.Windows.Forms.ListView lvAnimalList;
+        private System.Windows.Forms.ColumnHeader chID;
+        private System.Windows.Forms.ColumnHeader chName;
+        private System.Windows.Forms.ColumnHeader chAge;
+        private System.Windows.Forms.ColumnHeader chGender;
+        private System.Windows.Forms.ColumnHeader chSpecialCharacters;
     }
 }
