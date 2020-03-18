@@ -63,7 +63,11 @@ namespace ApuAnimalsHotel
             get { return m_animalList.Count; }
         }
 
-       
+       public Animal GetElementById(int id)
+        {
+            var value = m_animalList.First(item => item.Id == id);
+            return value;
+        }
         
     }
 }

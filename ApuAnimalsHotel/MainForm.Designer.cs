@@ -404,6 +404,7 @@
             this.chGender,
             this.chSpecialCharacters});
             this.lvAnimalList.FullRowSelect = true;
+            this.lvAnimalList.GridLines = true;
             this.lvAnimalList.HideSelection = false;
             this.lvAnimalList.Location = new System.Drawing.Point(478, 33);
             this.lvAnimalList.MultiSelect = false;
@@ -412,6 +413,7 @@
             this.lvAnimalList.TabIndex = 6;
             this.lvAnimalList.UseCompatibleStateImageBehavior = false;
             this.lvAnimalList.View = System.Windows.Forms.View.Details;
+            this.lvAnimalList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvAnimalList_ColumnClick);
             this.lvAnimalList.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // chID

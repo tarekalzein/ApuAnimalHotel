@@ -19,6 +19,7 @@ namespace ApuAnimalsHotel
         string INSECT_CHAR_LABEL = "Count of Legs";
 
         private AnimalManager animalManager = null;
+        private ListViewItemSorter lvItemSort;
         public MainForm()
         {
             InitializeComponent();           
@@ -32,7 +33,7 @@ namespace ApuAnimalsHotel
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            
+           
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -61,34 +62,35 @@ namespace ApuAnimalsHotel
                 string ch1="-";
                 string ch2="-";
 
+                //Dynamically bind the animal object to its subtype to get type specific properties such as breed 
                 switch (animal) 
                 {
                     case Dog dog:
                         dog = (Dog)animal;
-                        ch1 = dog.TeethCount.ToString();
-                        ch2 = dog.Breed;
+                        ch1 = "Teeth Count: "+ dog.TeethCount.ToString();
+                        ch2 = "Breed: " + dog.Breed;
                         break;
 
                     case Cat cat:
                         cat = (Cat)animal;
-                        ch1 = cat.TeethCount.ToString();
-                        ch2 = cat.Breed;
+                        ch1 = "Teeth Count: " + cat.TeethCount.ToString();
+                        ch2 = "Breed: " + cat.Breed;
                         break;
 
                     case Bee bee:
                         bee = (Bee)animal;
-                        ch1 =bee.CountOfLegs.ToString();
-                        ch2 = bee.BeeSpecies;
+                        ch1 = "Count of legs: " + bee.CountOfLegs.ToString();
+                        ch2 = "Bee species: " + bee.BeeSpecies;
                         break;
 
                     case Butterfly butterfly:
                         butterfly = (Butterfly)animal;
-                        ch1 = butterfly.CountOfLegs.ToString();
-                        ch2 = butterfly.WingColor;
+                        ch1 = "Count of legs: " + butterfly.CountOfLegs.ToString();
+                        ch2 = "Wing color: " + butterfly.WingColor;
                         break;
                 }
                 
-              
+              //Create the string (row) to be added in the ListView.
                 var row = new string[]
                 {
                      animal.Id.ToString(),
@@ -103,6 +105,13 @@ namespace ApuAnimalsHotel
 
                 lvAnimalList.Items.Add(lvitem);
 
+                txtName.Clear();
+                txtAge.Clear();
+                cmbGender.SelectedIndex = (int)GenderType.Unknown;
+                txtChar1.Clear();
+                txtChar2.Clear();
+                lbCategory.ClearSelected();
+                lbObject.ClearSelected();
 
 
             }
@@ -200,6 +209,8 @@ namespace ApuAnimalsHotel
 
         private void InitializeGui()
         {
+            lvItemSort = new ListViewItemSorter();
+            this.lvAnimalList.ListViewItemSorter = lvItemSort;
 
             lblChar1.Text = ""; //remove label text on first run.
             lblChar2.Text = "";
@@ -452,12 +463,14 @@ namespace ApuAnimalsHotel
             //Get the animal object from animal manager in the selected index.
             if(lvAnimalList.SelectedItems.Count>0) // This if statement is to prevent nullpointerexception on listview index change. when we change selection this will raise the selecedindexchanged twice causing error.
             {
-                Animal animal = animalManager.GetElementAtPosition(lvAnimalList.SelectedItems[0].Index);
+                //Animal animal = animalManager.GetElementAtPosition(lvAnimalList.SelectedItems[0].Index);
+                int selectedAnimalId =Int32.Parse(lvAnimalList.SelectedItems[0].SubItems[0].Text) ; //get the id field from the selected row
+                Animal animal = animalManager.GetElementById(selectedAnimalId);
                 lbEaterType.Items.Add(animal.GetEaterType());// Put the Eater type in the eater type label
 
                 for (int i = 0; i < animal.GetFoodSchedule().Count; i++)
                 {
-                    string test = "[" + (i + 1) + "] " + animal.GetFoodSchedule().GetFoodSchedule(i);
+                    string test = "[" + (i + 1) + "] " + animal.GetFoodSchedule().GetFoodSchedule(i); //i+1 to start counting from 1 not from 0
                     lbFoodSchedule.Items.Add(test);
                 }
             }
@@ -467,6 +480,27 @@ namespace ApuAnimalsHotel
             }
             
 
+        }
+
+        private void lvAnimalList_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            if(e.Column == lvItemSort.SortColumn)
+            {
+                if(lvItemSort.Order==SortOrder.Ascending)
+                {
+                    lvItemSort.Order = SortOrder.Descending;
+                }
+                else
+                {
+                    lvItemSort.Order = SortOrder.Ascending;
+                }
+
+            }else
+            {
+                lvItemSort.SortColumn = e.Column;
+                lvItemSort.Order = SortOrder.Ascending;
+            }
+            this.lvAnimalList.Sort();
         }
     }
 }

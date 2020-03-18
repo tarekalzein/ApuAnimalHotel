@@ -53,6 +53,7 @@
     <Compile Include="Enums\InsectSpecies.cs" />
     <Compile Include="Enums\MammalSpecies.cs" />
     <Compile Include="Interfaces\IAnimal.cs" />
+    <Compile Include="ListViewItemSorter.cs" />
     <Compile Include="POCO\Animal.cs" />
     <Compile Include="POCO\Bee.cs">
       <DependentUpon>Insect.cs</DependentUpon>
