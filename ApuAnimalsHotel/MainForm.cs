@@ -57,7 +57,6 @@ namespace ApuAnimalsHotel
                 }
 
             }
-            UpdateResults(); //update results in the result list.
 
             lvAnimalList.Items.Clear();
 
@@ -131,17 +130,13 @@ namespace ApuAnimalsHotel
             txtChar2.Clear();
             lbCategory.ClearSelected();
             lbObject.ClearSelected();
+
+            lblChar1.Text = "";
+            lblChar2.Text = "";
+            txtChar1.Visible = false;
+            txtChar2.Visible = false;
         }
 
-        private void UpdateResults()
-        {
-            lbResults.Items.Clear(); //start with a clean list.
-            for (int index = 0; index < animalManager.ElementCount; index++)
-            {
-                Animal animal = animalManager.GetElementAtPosition(index);  //Get the index of the animal in the list.
-                lbResults.Items.Add(animal.ToString()); //add fetched data to the list.
-            }
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -455,21 +450,7 @@ namespace ApuAnimalsHotel
 
         }
 
-        private void lbResults_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            lbFoodSchedule.Items.Clear();
-            lbEaterType.Items.Clear();
-
-            //Get the animal object from animal manager in the selected index.
-            Animal animal = animalManager.GetElementAtPosition(lbResults.SelectedIndex);  
-            lbEaterType.Items.Add(animal.GetEaterType());// Put the Eater type in the eater type label
-
-            for (int i = 0; i < animal.GetFoodSchedule().Count; i++)
-            {
-                string test = "["+(i+1)+"] " + animal.GetFoodSchedule().GetFoodSchedule(i);
-                lbFoodSchedule.Items.Add(test);
-            }                        
-        }
+        
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -494,7 +475,6 @@ namespace ApuAnimalsHotel
             {
                 return;
             }
-            
 
         }
 
