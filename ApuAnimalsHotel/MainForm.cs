@@ -49,13 +49,20 @@ namespace ApuAnimalsHotel
             bool success = CheckInputs();
             if (success)
             {
-                string animalObjType = lbObject.SelectedItem.ToString();
-                CreateAnimalInstance(animalObjType,animal);
+
+                if(lbObject.SelectedItem != null) //this is to avoid crash in app due to nullpointerexception when user changes the animal type without adding data
+                {
+                    string animalObjType = lbObject.SelectedItem.ToString();
+                    CreateAnimalInstance(animalObjType, animal);
+                }
+
             }
             UpdateResults(); //update results in the result list.
 
             lvAnimalList.Items.Clear();
 
+            //This part will be moved to UpdateResults() method.
+            //switch cases to find animal subtype to add it to the list view.
             for (int index = 0; index < animalManager.ElementCount; index++)
             {
                 animal = animalManager.GetElementAtPosition(index);  //Get the index of the animal in the list.
@@ -105,16 +112,25 @@ namespace ApuAnimalsHotel
 
                 lvAnimalList.Items.Add(lvitem);
 
-                txtName.Clear();
-                txtAge.Clear();
-                cmbGender.SelectedIndex = (int)GenderType.Unknown;
-                txtChar1.Clear();
-                txtChar2.Clear();
-                lbCategory.ClearSelected();
-                lbObject.ClearSelected();
+                ClearList();
+
 
 
             }
+        }
+
+        /// <summary>
+        /// Method to empty the text and combo boxes so the user can enter fresh data.
+        /// </summary>
+        private void ClearList()
+        {
+            txtName.Clear();
+            txtAge.Clear();
+            cmbGender.SelectedIndex = (int)GenderType.Unknown;
+            txtChar1.Clear();
+            txtChar2.Clear();
+            lbCategory.ClearSelected();
+            lbObject.ClearSelected();
         }
 
         private void UpdateResults()
@@ -482,21 +498,27 @@ namespace ApuAnimalsHotel
 
         }
 
+        /// <summary>
+        /// Action methods to sort the list view on headers click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lvAnimalList_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             if(e.Column == lvItemSort.SortColumn)
             {
-                if(lvItemSort.Order==SortOrder.Ascending)
+                if(lvItemSort.Order==SortOrder.Ascending) //if The current order is asc then change it to desc
                 {
                     lvItemSort.Order = SortOrder.Descending;
                 }
-                else
+                else //the other way round
                 {
                     lvItemSort.Order = SortOrder.Ascending;
                 }
 
             }else
             {
+                // Default value to start with.
                 lvItemSort.SortColumn = e.Column;
                 lvItemSort.Order = SortOrder.Ascending;
             }

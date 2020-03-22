@@ -52,11 +52,24 @@ namespace ApuAnimalsHotel
             listViewX = (ListViewItem)x;
             listViewY = (ListViewItem)y;
 
-            //Compare method.
-            compareResult = ObjectCompare.Compare(listViewX.SubItems[ColumnToSort].Text, listViewY.SubItems[ColumnToSort].Text);
+            string x1 = listViewX.SubItems[ColumnToSort].Text;
+            string x2 = listViewY.SubItems[ColumnToSort].Text;
+
+            if (ColumnToSort == 0 || ColumnToSort==2) // if the sorting is on Column 0 (ID) or Column 2 (Age) then compare INT (so sorting won't sort 1 10 11 in order insteaf of 1 2 3)
+            {
+               
+                compareResult = Convert.ToInt32(x1).CompareTo(Convert.ToInt32(x2));
+            }
+            else
+            {
+                //Compare method for string input.
+
+                compareResult = ObjectCompare.Compare(x1, x2);
+
+            }
 
             //Choose correct return based on comparison type
-            if(sortOrder==SortOrder.Ascending)
+            if (sortOrder==SortOrder.Ascending)
             {
                 return compareResult;
             }

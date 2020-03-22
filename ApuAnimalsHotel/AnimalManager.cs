@@ -62,10 +62,14 @@ namespace ApuAnimalsHotel
         {
             get { return m_animalList.Count; }
         }
-
+        /// <summary>
+        /// Method that with help of LINQ finds the animal object by its id.
+        /// </summary>
+        /// <param name="id">integer animal's id</param>
+        /// <returns></returns>
        public Animal GetElementById(int id)
         {
-            var value = m_animalList.First(item => item.Id == id);
+            var value = m_animalList.First(item => item.Id == id);//LINQ to find animal object by its id
             return value;
         }
         
