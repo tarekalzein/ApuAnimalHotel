@@ -317,7 +317,7 @@
             // 
             // chID
             // 
-            this.chID.Text = "ID";
+            this.chID.Text = "ID ▼";
             this.chID.Width = 48;
             // 
             // chName

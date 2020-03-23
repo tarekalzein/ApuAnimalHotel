@@ -518,26 +518,55 @@ namespace ApuAnimalsHotel
             if (e.Column==0)
             {
                 animalManager.SortById();
+                ResetColumnHeaders();
+                chID.Text = "ID" + " ▼"; //to display that list is sorted according to this column.
             }
             else if (e.Column == 1)
             {
                 animalManager.SortByName();
+                ResetColumnHeaders();
+                chName.Text = "Name" + " ▼";
+
             }
             else if(e.Column==2)
             {
                 animalManager.SortByAge();
+                ResetColumnHeaders();
+                chAge.Text = "Age" + " ▼";
+
+
             }
             else if(e.Column==3)
             {
                 animalManager.SortByGender();
+                ResetColumnHeaders();
+                chGender.Text = "Gender" + " ▼";
+
+
             }
             else if(e.Column==4)
             {
                 animalManager.SortyBySpecies();
+                ResetColumnHeaders();
+                chSpecies.Text = "Species" + " ▼";
+
+
             }
-            
+
             UpdateAnimalListView();
 
+        }
+
+        /// <summary>
+        /// A simple and not very effecient method to reset the text in list view column headers to their defaults.
+        /// </summary>
+        private void ResetColumnHeaders()
+        {
+            chID.Text = "ID";
+            chName.Text = "Name";
+            chAge.Text = "Age";
+            chGender.Text = "Gender";
+            chSpecies.Text = "Species";
         }
     }
 }
