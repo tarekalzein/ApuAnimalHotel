@@ -59,6 +59,7 @@
             this.lbEaterType = new System.Windows.Forms.ListBox();
             this.lbFoodSchedule = new System.Windows.Forms.ListBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.chSpecies = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.grpbx1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgAnimal)).BeginInit();
             this.grpbxSpecialChar.SuspendLayout();
@@ -299,11 +300,12 @@
             this.chName,
             this.chAge,
             this.chGender,
+            this.chSpecies,
             this.chSpecialCharacters});
             this.lvAnimalList.FullRowSelect = true;
             this.lvAnimalList.GridLines = true;
             this.lvAnimalList.HideSelection = false;
-            this.lvAnimalList.Location = new System.Drawing.Point(9, 33);
+            this.lvAnimalList.Location = new System.Drawing.Point(6, 27);
             this.lvAnimalList.MultiSelect = false;
             this.lvAnimalList.Name = "lvAnimalList";
             this.lvAnimalList.Size = new System.Drawing.Size(946, 152);
@@ -336,7 +338,7 @@
             // chSpecialCharacters
             // 
             this.chSpecialCharacters.Text = "Special Characters";
-            this.chSpecialCharacters.Width = 572;
+            this.chSpecialCharacters.Width = 440;
             // 
             // groupBox1
             // 
@@ -374,6 +376,10 @@
             this.label6.Size = new System.Drawing.Size(60, 13);
             this.label6.TabIndex = 0;
             this.label6.Text = "Eater Type";
+            // 
+            // chSpecies
+            // 
+            this.chSpecies.Text = "Species";
             // 
             // MainForm
             // 
@@ -432,5 +438,6 @@
         private System.Windows.Forms.ColumnHeader chAge;
         private System.Windows.Forms.ColumnHeader chGender;
         private System.Windows.Forms.ColumnHeader chSpecialCharacters;
+        private System.Windows.Forms.ColumnHeader chSpecies;
     }
 }

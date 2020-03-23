@@ -72,6 +72,48 @@ namespace ApuAnimalsHotel
             var value = m_animalList.First(item => item.Id == id);//LINQ to find animal object by its id
             return value;
         }
-        
+
+        public void SortById()
+        {
+            m_animalList.Sort(delegate (Animal x, Animal y)
+            {
+                return x.Id.CompareTo(y.Id);
+            });
+            
+        }
+
+        public void SortByAge()
+        {
+            m_animalList.Sort(delegate (Animal x, Animal y)
+            {
+                return x.Age.CompareTo(y.Age);
+            });
+
+        }
+        public void SortByName()
+        {
+            m_animalList.Sort(delegate (Animal x, Animal y)
+            {
+                return x.Name.CompareTo(y.Name);
+            });
+        }
+
+        public void SortByGender()
+        {
+            m_animalList.Sort(delegate (Animal x, Animal y)
+            {
+                return x.Gender.CompareTo(y.Gender);
+            });
+        }
+
+        public void SortyBySpecies()
+        {
+            m_animalList.Sort(delegate (Animal x, Animal y)
+            {
+                return x.GetSpecies().CompareTo(y.GetSpecies());
+            });
+        }
+
+
     }
 }

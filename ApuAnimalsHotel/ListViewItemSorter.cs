@@ -63,7 +63,6 @@ namespace ApuAnimalsHotel
             else
             {
                 //Compare method for string input.
-
                 compareResult = ObjectCompare.Compare(x1, x2);
 
             }

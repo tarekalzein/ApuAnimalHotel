@@ -57,23 +57,29 @@ namespace ApuAnimalsHotel
                 }
 
             }
+            UpdateAnimalListView();
 
+            
+        }
+
+        private void UpdateAnimalListView()
+        {
             lvAnimalList.Items.Clear();
 
-            //This part will be moved to UpdateResults() method.
+
             //switch cases to find animal subtype to add it to the list view.
             for (int index = 0; index < animalManager.ElementCount; index++)
             {
-                animal = animalManager.GetElementAtPosition(index);  //Get the index of the animal in the list.
-                string ch1="-";
-                string ch2="-";
+                Animal animal = animalManager.GetElementAtPosition(index);  //Get the index of the animal in the list.
+                string ch1 = "-";
+                string ch2 = "-";
 
                 //Dynamically bind the animal object to its subtype to get type specific properties such as breed 
-                switch (animal) 
+                switch (animal)
                 {
                     case Dog dog:
                         dog = (Dog)animal;
-                        ch1 = "Teeth Count: "+ dog.TeethCount.ToString();
+                        ch1 = "Teeth Count: " + dog.TeethCount.ToString();
                         ch2 = "Breed: " + dog.Breed;
                         break;
 
@@ -95,16 +101,17 @@ namespace ApuAnimalsHotel
                         ch2 = "Wing color: " + butterfly.WingColor;
                         break;
                 }
-                
-              //Create the string (row) to be added in the ListView.
+
+                //Create the string (row) to be added in the ListView.
                 var row = new string[]
                 {
                      animal.Id.ToString(),
                      animal.Name,
                      animal.Age.ToString(),
                      animal.Gender.ToString(),
+                     animal.GetSpecies(),
                      (ch1+", "+ch2)
-                     
+
                 };
                 var lvitem = new ListViewItem(row);
                 lvitem.Tag = animal;
@@ -485,24 +492,52 @@ namespace ApuAnimalsHotel
         /// <param name="e"></param>
         private void lvAnimalList_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            if(e.Column == lvItemSort.SortColumn)
-            {
-                if(lvItemSort.Order==SortOrder.Ascending) //if The current order is asc then change it to desc
-                {
-                    lvItemSort.Order = SortOrder.Descending;
-                }
-                else //the other way round
-                {
-                    lvItemSort.Order = SortOrder.Ascending;
-                }
+            //Commented out: Graphical sorting for ListView list
+            //if(e.Column == lvItemSort.SortColumn)
+            //{
+            //    if(lvItemSort.Order==SortOrder.Ascending) //if The current order is asc then change it to desc
+            //    {
+            //        lvItemSort.Order = SortOrder.Descending;
+            //    }
+            //    else //the other way round
+            //    {
+            //        lvItemSort.Order = SortOrder.Ascending;
+            //    }
 
-            }else
+            //}else
+            //{
+            //    // Default value to start with.
+            //    lvItemSort.SortColumn = e.Column;
+            //    lvItemSort.Order = SortOrder.Ascending;
+            //}
+            //this.lvAnimalList.Sort();
+
+
+            //Sorting the original list in animal manager
+            //This can be turned to switch.
+            if (e.Column==0)
             {
-                // Default value to start with.
-                lvItemSort.SortColumn = e.Column;
-                lvItemSort.Order = SortOrder.Ascending;
+                animalManager.SortById();
             }
-            this.lvAnimalList.Sort();
+            else if (e.Column == 1)
+            {
+                animalManager.SortByName();
+            }
+            else if(e.Column==2)
+            {
+                animalManager.SortByAge();
+            }
+            else if(e.Column==3)
+            {
+                animalManager.SortByGender();
+            }
+            else if(e.Column==4)
+            {
+                animalManager.SortyBySpecies();
+            }
+            
+            UpdateAnimalListView();
+
         }
     }
 }
