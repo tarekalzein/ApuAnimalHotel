@@ -18,8 +18,11 @@ namespace ApuAnimalsHotel
         string MAMMAL_CHAR_LABEL = "Count of teeth";
         string INSECT_CHAR_LABEL = "Count of Legs";
 
-        private AnimalManager animalManager = null;
+        private AnimalManager animalManager = new AnimalManager();
+        private RecipeManager recipeManager = new RecipeManager();
+
         private ListViewItemSorter lvItemSort;
+
         public MainForm()
         {
             InitializeComponent();           
@@ -233,12 +236,7 @@ namespace ApuAnimalsHotel
             lblChar1.Text = ""; //remove label text on first run.
             lblChar2.Text = "";
 
-            //Create an instance of AnimalManager to hold List<> for data entry.
-            animalManager = new AnimalManager();
 
-
-
-            //TO DO: move into a method .e.g. MyInitialization();
             //List CategoryType items in list box.
             Array categoryArray = typeof(CategoryType).GetEnumValues();
             foreach (CategoryType categoryType in categoryArray)
@@ -567,6 +565,18 @@ namespace ApuAnimalsHotel
             chAge.Text = "Age";
             chGender.Text = "Gender";
             chSpecies.Text = "Species";
+        }
+
+        private void btnAddFood_Click(object sender, EventArgs e)
+        {
+            RecipeForm recipeForm = new RecipeForm();
+            recipeForm.ShowDialog();
+        }
+
+        private void btnAddStaff_Click(object sender, EventArgs e)
+        {
+            StaffForm staffForm = new StaffForm();
+            staffForm.ShowDialog();
         }
     }
 }

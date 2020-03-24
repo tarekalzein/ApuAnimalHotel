@@ -63,6 +63,16 @@ namespace ApuAnimalsHotel.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AddStaff {
+            get {
+                object obj = ResourceManager.GetObject("AddStaff", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap zooBanner {
             get {
                 object obj = ResourceManager.GetObject("zooBanner", resourceCulture);

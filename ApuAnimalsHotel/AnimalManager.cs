@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ApuAnimalsHotel.POCO;
+using ApuAnimalsHotel.Interfaces;
 
 namespace ApuAnimalsHotel
 {
-    class AnimalManager
+    class AnimalManager : ListManager<Animal>
     {
 
         private List<Animal> m_animalList;
@@ -17,7 +18,7 @@ namespace ApuAnimalsHotel
         public AnimalManager() 
         {
             m_animalList = new List<Animal>();
-            id = 1;
+            id = 100;
             
         }
 

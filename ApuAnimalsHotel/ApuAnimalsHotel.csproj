@@ -53,6 +53,8 @@
     <Compile Include="Enums\InsectSpecies.cs" />
     <Compile Include="Enums\MammalSpecies.cs" />
     <Compile Include="Interfaces\IAnimal.cs" />
+    <Compile Include="Interfaces\IListManager.cs" />
+    <Compile Include="ListManager.cs" />
     <Compile Include="ListViewItemSorter.cs" />
     <Compile Include="POCO\Animal.cs" />
     <Compile Include="POCO\Bee.cs">
@@ -74,6 +76,21 @@
     <Compile Include="POCO\Mammal.cs">
       <DependentUpon>Animal.cs</DependentUpon>
     </Compile>
+    <Compile Include="POCO\Recipe.cs" />
+    <Compile Include="Staff.cs" />
+    <Compile Include="StaffForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StaffForm.Designer.cs">
+      <DependentUpon>StaffForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RecipeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RecipeForm.Designer.cs">
+      <DependentUpon>RecipeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RecipeManager.cs" />
     <Compile Include="WelcomeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +107,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StaffForm.resx">
+      <DependentUpon>StaffForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RecipeForm.resx">
+      <DependentUpon>RecipeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WelcomeForm.resx">
       <DependentUpon>WelcomeForm.cs</DependentUpon>
@@ -119,6 +142,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\zooBanner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AddStaff.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
