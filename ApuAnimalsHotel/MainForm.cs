@@ -21,7 +21,6 @@ namespace ApuAnimalsHotel
         private AnimalManager animalManager = new AnimalManager();
         private RecipeManager recipeManager = new RecipeManager();
 
-        private ListViewItemSorter lvItemSort;
 
         public MainForm()
         {
@@ -230,8 +229,6 @@ namespace ApuAnimalsHotel
 
         private void InitializeGui()
         {
-            lvItemSort = new ListViewItemSorter();
-            this.lvAnimalList.ListViewItemSorter = lvItemSort;
 
             lblChar1.Text = ""; //remove label text on first run.
             lblChar2.Text = "";
@@ -465,9 +462,9 @@ namespace ApuAnimalsHotel
             //Get the animal object from animal manager in the selected index.
             if(lvAnimalList.SelectedItems.Count>0) // This if statement is to prevent nullpointerexception on listview index change. when we change selection this will raise the selecedindexchanged twice causing error.
             {
-                //Animal animal = animalManager.GetElementAtPosition(lvAnimalList.SelectedItems[0].Index);
-                int selectedAnimalId =Int32.Parse(lvAnimalList.SelectedItems[0].SubItems[0].Text) ; //get the id field from the selected row
-                Animal animal = animalManager.GetElementById(selectedAnimalId);
+               
+                Animal animal = animalManager.GetElementAtPosition(lvAnimalList.SelectedIndices[0]); //No need to find by ID anymore since both lists are identical
+
                 lbEaterType.Items.Add(animal.GetEaterType());// Put the Eater type in the eater type label
 
                 for (int i = 0; i < animal.GetFoodSchedule().Count; i++)
@@ -489,28 +486,7 @@ namespace ApuAnimalsHotel
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void lvAnimalList_ColumnClick(object sender, ColumnClickEventArgs e)
-        {
-            //Commented out: Graphical sorting for ListView list
-            //if(e.Column == lvItemSort.SortColumn)
-            //{
-            //    if(lvItemSort.Order==SortOrder.Ascending) //if The current order is asc then change it to desc
-            //    {
-            //        lvItemSort.Order = SortOrder.Descending;
-            //    }
-            //    else //the other way round
-            //    {
-            //        lvItemSort.Order = SortOrder.Ascending;
-            //    }
-
-            //}else
-            //{
-            //    // Default value to start with.
-            //    lvItemSort.SortColumn = e.Column;
-            //    lvItemSort.Order = SortOrder.Ascending;
-            //}
-            //this.lvAnimalList.Sort();
-
-
+        {          
             //Sorting the original list in animal manager
             //This can be turned to switch.
             if (e.Column==0)
@@ -542,14 +518,14 @@ namespace ApuAnimalsHotel
 
 
             }
-            else if(e.Column==4)
-            {
-                animalManager.SortyBySpecies();
-                ResetColumnHeaders();
-                chSpecies.Text = "Species" + " ▼";
+            //else if(e.Column==4)
+            //{
+            //    animalManager.SortyBySpecies();
+            //    ResetColumnHeaders();
+            //    chSpecies.Text = "Species" + " ▼";
 
 
-            }
+            //}
 
             UpdateAnimalListView();
 
@@ -577,6 +553,17 @@ namespace ApuAnimalsHotel
         {
             StaffForm staffForm = new StaffForm();
             staffForm.ShowDialog();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if(lvAnimalList.SelectedItems.Count>0)
+            {
+                animalManager.DeleteAnimal(lvAnimalList.SelectedIndices[0]);
+                UpdateAnimalListView();
+            }
+            
+
         }
     }
 }

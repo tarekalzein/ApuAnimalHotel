@@ -11,25 +11,25 @@ namespace ApuAnimalsHotel
     class AnimalManager : ListManager<Animal>
     {
 
-        private List<Animal> m_animalList;
+        private ListManager<Animal> listManager;
+
         private int id;
 
         //Constructor with no parameters. Creates a list of Animals and resets the ID counter to 1.
-        public AnimalManager() 
+        public AnimalManager()
         {
-            m_animalList = new List<Animal>();
+            listManager = new ListManager<Animal>();
             id = 100;
-            
+
         }
 
-        public void Add(Animal animalObj)
+        public new void Add(Animal animalObj)
         {
             if (animalObj != null)
             {
                 animalObj.Id = id;
-                m_animalList.Add(animalObj);
+                listManager.Add(animalObj);
                 id++; //Increment ID after every successful add.
-                
 
             }
         }
@@ -37,84 +37,63 @@ namespace ApuAnimalsHotel
         //Method to get index number for an element in the list.
         public Animal GetElementAtPosition(int index)
         {
-            if (IsIndexValid(index))
+            if (listManager.CheckIndex(index))
             {
-                if (m_animalList[index] is Dog)
-                    return new Dog((Dog)m_animalList[index]);
-                if (m_animalList[index] is Cat)
-                    return new Cat((Cat)m_animalList[index]);
-                if (m_animalList[index] is Bee)
-                    return new Bee((Bee)m_animalList[index]);
-                if (m_animalList[index] is Butterfly)
-                    return new Butterfly((Butterfly)m_animalList[index]);
-                return null;
+                Animal animal = listManager.GetAt(index);
+                if (animal is Dog)
+                    return new Dog((Dog)animal);
+                if (animal is Cat)
+                    return new Cat((Cat)animal);
+                if (animal is Bee)
+                    return new Bee((Bee)animal);
+                if (animal is Butterfly)
+                    return new Butterfly((Butterfly)animal);
+                else
+                    return null;
             }
-            else
-                return null;
-        }
+            return null;
 
-        //method to check validity of index (if within scope).
-        public bool IsIndexValid(int index)
-        {
-            return ((index >= 0) && (index < m_animalList.Count));
         }
 
         public int ElementCount
         {
-            get { return m_animalList.Count; }
+            get { return listManager.Count; }
         }
+
         /// <summary>
         /// Method that with help of LINQ finds the animal object by its id.
         /// </summary>
         /// <param name="id">integer animal's id</param>
         /// <returns></returns>
-       public Animal GetElementById(int id)
+        public Animal GetElementById(int id)//Not needed anymore
         {
-            var value = m_animalList.First(item => item.Id == id);//LINQ to find animal object by its id
-            return value;
-        }
-
-        public void SortById()
-        {
-            m_animalList.Sort(delegate (Animal x, Animal y)
-            {
-                return x.Id.CompareTo(y.Id);
-            });
-            
-        }
-
-        public void SortByAge()
-        {
-            m_animalList.Sort(delegate (Animal x, Animal y)
-            {
-                return x.Age.CompareTo(y.Age);
-            });
-
-        }
-        public void SortByName()
-        {
-            m_animalList.Sort(delegate (Animal x, Animal y)
-            {
-                return x.Name.CompareTo(y.Name);
-            });
-        }
-
-        public void SortByGender()
-        {
-            m_animalList.Sort(delegate (Animal x, Animal y)
-            {
-                return x.Gender.CompareTo(y.Gender);
-            });
-        }
-
-        public void SortyBySpecies()
-        {
-            m_animalList.Sort(delegate (Animal x, Animal y)
-            {
-                return x.GetSpecies().CompareTo(y.GetSpecies());
-            });
+            return listManager.GetById(id);
         }
 
 
+        public new void SortByAge()
+        {
+
+            listManager.SortByAge();
+        }
+        public new void SortByName()
+        { 
+            listManager.SortByName();
+        }
+
+        public new void SortByGender()
+        {
+            listManager.SortByGender();
+        }
+
+        public new void SortById()
+        {
+            listManager.SortById();
+        }
+
+        public void DeleteAnimal(int index)
+        {
+            listManager.DeleteAt(index);
+        }
     }
 }
