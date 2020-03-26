@@ -7,7 +7,7 @@ using ApuAnimalsHotel.Interfaces;
 
 namespace ApuAnimalsHotel
 {
-    class Staff
+    public class Staff
     {
         private string name;
         private IListManager<string> m_qualifications;
@@ -24,6 +24,23 @@ namespace ApuAnimalsHotel
             {
                 name = value;
             }
+        }
+
+        public void AddQualification(string qualification)
+        {
+            m_qualifications.Add(qualification);
+        }
+
+       public override string ToString()
+        {
+            string qualifications = "";
+            for (int i=0; i<m_qualifications.Count; i++)
+            {
+                qualifications += m_qualifications.GetAt(i)+ ". ";
+                //qualifications += " ";
+            }
+
+            return Name +": "+ qualifications; 
         }
     }
 }

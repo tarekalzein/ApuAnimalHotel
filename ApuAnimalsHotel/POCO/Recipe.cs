@@ -6,20 +6,53 @@ using System.Threading.Tasks;
 
 namespace ApuAnimalsHotel.POCO
 {
-    class Recipe
+    public class Recipe
     {
         private ListManager<string> m_ingredients;
         private string name;
 
+        /// <summary>
+        /// Constructor method that instantiates a generic list.
+        /// </summary>
         public Recipe()
         {
-            //Not sure if this is needed yet.
             m_ingredients = new ListManager<string>();
             name = Name;
         }
-
+        /// <summary>
+        /// Getter for the list
+        /// </summary>
         public ListManager<string> Ingredients { get; }
+
+        /// <summary>
+        /// Getter for the Name property
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Method to add ingredient item, it calls the generic method Add in List Manager.
+        /// </summary>
+        /// <param name="ingredient"></param>
+        public void AddIngredient(string ingredient)
+        {
+            m_ingredients.Add(ingredient);
+        }
+
+        /// <summary>
+        /// Overriding toString method.
+        /// </summary>
+        /// <returns>One string that contains the name and all ingredients in one line.</returns>
+        public override string ToString()
+        {
+            string ingredients = "";
+            for(int i=0; i<m_ingredients.Count; i++)
+            {
+                ingredients += m_ingredients.GetAt(i) + ". "; ;
+            }
+            return Name + ": " + ingredients;
+        }
+
+
 
     }
 }

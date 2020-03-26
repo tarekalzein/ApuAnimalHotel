@@ -20,9 +20,12 @@ namespace ApuAnimalsHotel
         {
             listManager = new ListManager<Animal>();
             id = 100;
-
         }
 
+        /// <summary>
+        /// Adds Id to animal object then calls the add method from List Manager.
+        /// </summary>
+        /// <param name="animalObj"></param>
         public new void Add(Animal animalObj)
         {
             if (animalObj != null)
@@ -30,11 +33,14 @@ namespace ApuAnimalsHotel
                 animalObj.Id = id;
                 listManager.Add(animalObj);
                 id++; //Increment ID after every successful add.
-
             }
         }
 
-        //Method to get index number for an element in the list.
+        /// <summary>
+        /// Method to fetch animal object from the list manager and casts it to its type.
+        /// </summary>
+        /// <param name="index">index of the animal in list</param>
+        /// <returns>object of animal from list manager</returns>
         public Animal GetElementAtPosition(int index)
         {
             if (listManager.CheckIndex(index))
@@ -52,45 +58,52 @@ namespace ApuAnimalsHotel
                     return null;
             }
             return null;
-
         }
-
+        /// <summary>
+        /// Getter for list count.
+        /// </summary>
         public int ElementCount
         {
             get { return listManager.Count; }
         }
 
         /// <summary>
-        /// Method that with help of LINQ finds the animal object by its id.
+        /// Reference method to ListManager sorting method
         /// </summary>
-        /// <param name="id">integer animal's id</param>
-        /// <returns></returns>
-        public Animal GetElementById(int id)//Not needed anymore
-        {
-            return listManager.GetById(id);
-        }
-
-
         public new void SortByAge()
         {
 
             listManager.SortByAge();
         }
+
+        /// <summary>
+        /// eference method to ListManager sorting method
+        /// </summary>
         public new void SortByName()
         { 
             listManager.SortByName();
         }
 
+        /// <summary>
+        /// eference method to ListManager sorting method
+        /// </summary>
         public new void SortByGender()
         {
             listManager.SortByGender();
         }
 
+        /// <summary>
+        /// eference method to ListManager sorting method
+        /// </summary>
         public new void SortById()
         {
             listManager.SortById();
         }
 
+        /// <summary>
+        /// eference method to ListManager sorting method
+        /// </summary>
+        /// <param name="index"></param>
         public void DeleteAnimal(int index)
         {
             listManager.DeleteAt(index);

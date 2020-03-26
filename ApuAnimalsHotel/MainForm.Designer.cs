@@ -411,9 +411,9 @@
             // lbFoodSchedule
             // 
             this.lbFoodSchedule.FormattingEnabled = true;
-            this.lbFoodSchedule.Location = new System.Drawing.Point(10, 42);
+            this.lbFoodSchedule.Location = new System.Drawing.Point(10, 45);
             this.lbFoodSchedule.Name = "lbFoodSchedule";
-            this.lbFoodSchedule.Size = new System.Drawing.Size(236, 160);
+            this.lbFoodSchedule.Size = new System.Drawing.Size(236, 134);
             this.lbFoodSchedule.TabIndex = 1;
             // 
             // label6

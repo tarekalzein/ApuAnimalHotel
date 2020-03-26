@@ -57,17 +57,13 @@ namespace ApuAnimalsHotel
                     string animalObjType = lbObject.SelectedItem.ToString();
                     CreateAnimalInstance(animalObjType, animal);
                 }
-
             }
-            UpdateAnimalListView();
-
-            
+            UpdateAnimalListView();            
         }
 
         private void UpdateAnimalListView()
         {
             lvAnimalList.Items.Clear();
-
 
             //switch cases to find animal subtype to add it to the list view.
             for (int index = 0; index < animalManager.ElementCount; index++)
@@ -175,7 +171,6 @@ namespace ApuAnimalsHotel
             txtChar2.Visible = true;
             txtChar1.Visible = true;
 
-
             var lbObjectSelection = lbObject.SelectedItem; //read animal object controller and rename label according to animal type.
 
             switch (lbObjectSelection)
@@ -203,7 +198,6 @@ namespace ApuAnimalsHotel
                     break;
             }
         }
-
         private void txtName_TextChanged(object sender, EventArgs e)
         {
 
@@ -500,35 +494,20 @@ namespace ApuAnimalsHotel
                 animalManager.SortByName();
                 ResetColumnHeaders();
                 chName.Text = "Name" + " ▼";
-
             }
             else if(e.Column==2)
             {
                 animalManager.SortByAge();
                 ResetColumnHeaders();
                 chAge.Text = "Age" + " ▼";
-
-
             }
             else if(e.Column==3)
             {
                 animalManager.SortByGender();
                 ResetColumnHeaders();
                 chGender.Text = "Gender" + " ▼";
-
-
             }
-            //else if(e.Column==4)
-            //{
-            //    animalManager.SortyBySpecies();
-            //    ResetColumnHeaders();
-            //    chSpecies.Text = "Species" + " ▼";
-
-
-            //}
-
             UpdateAnimalListView();
-
         }
 
         /// <summary>
@@ -542,19 +521,40 @@ namespace ApuAnimalsHotel
             chGender.Text = "Gender";
             chSpecies.Text = "Species";
         }
-
+        /// <summary>
+        /// Opens the recipe form and returns the recipe object to be added to recipe manager and add it to the food details list box.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddFood_Click(object sender, EventArgs e)
         {
             RecipeForm recipeForm = new RecipeForm();
-            recipeForm.ShowDialog();
+            if(recipeForm.ShowDialog() == DialogResult.OK)
+            {
+                recipeManager.Add(recipeForm.Recipe);              
+                lbFoodDetails.Items.Add(recipeForm.Recipe.ToString());
+            }    
         }
 
+        /// <summary>
+        /// Opens the staff form and returns an object of staff to be added to the food details list box
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddStaff_Click(object sender, EventArgs e)
         {
             StaffForm staffForm = new StaffForm();
-            staffForm.ShowDialog();
+            if(staffForm.ShowDialog() == DialogResult.OK)
+            {
+                lbFoodDetails.Items.Add(staffForm.Staff.ToString());
+            }
         }
 
+        /// <summary>
+        /// Delete the selected row in the animal list view.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if(lvAnimalList.SelectedItems.Count>0)
