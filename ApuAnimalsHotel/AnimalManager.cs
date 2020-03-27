@@ -11,14 +11,12 @@ namespace ApuAnimalsHotel
     class AnimalManager : ListManager<Animal>
     {
 
-        private ListManager<Animal> listManager;
 
         private int id;
 
         //Constructor with no parameters. Creates a list of Animals and resets the ID counter to 1.
         public AnimalManager()
         {
-            listManager = new ListManager<Animal>();
             id = 100;
         }
 
@@ -31,7 +29,7 @@ namespace ApuAnimalsHotel
             if (animalObj != null)
             {
                 animalObj.Id = id;
-                listManager.Add(animalObj);
+                base.Add(animalObj);
                 id++; //Increment ID after every successful add.
             }
         }
@@ -43,9 +41,9 @@ namespace ApuAnimalsHotel
         /// <returns>object of animal from list manager</returns>
         public Animal GetElementAtPosition(int index)
         {
-            if (listManager.CheckIndex(index))
+            if (base.CheckIndex(index))
             {
-                Animal animal = listManager.GetAt(index);
+                Animal animal = base.GetAt(index);
                 if (animal is Dog)
                     return new Dog((Dog)animal);
                 if (animal is Cat)
@@ -64,7 +62,7 @@ namespace ApuAnimalsHotel
         /// </summary>
         public int ElementCount
         {
-            get { return listManager.Count; }
+            get { return base.Count; }
         }
 
         /// <summary>
@@ -73,7 +71,7 @@ namespace ApuAnimalsHotel
         public new void SortByAge()
         {
 
-            listManager.SortByAge();
+            base.SortByAge();
         }
 
         /// <summary>
@@ -81,7 +79,7 @@ namespace ApuAnimalsHotel
         /// </summary>
         public new void SortByName()
         { 
-            listManager.SortByName();
+            base.SortByName();
         }
 
         /// <summary>
@@ -89,7 +87,7 @@ namespace ApuAnimalsHotel
         /// </summary>
         public new void SortByGender()
         {
-            listManager.SortByGender();
+            base.SortByGender();
         }
 
         /// <summary>
@@ -97,7 +95,7 @@ namespace ApuAnimalsHotel
         /// </summary>
         public new void SortById()
         {
-            listManager.SortById();
+            base.SortById();
         }
 
         /// <summary>
@@ -106,7 +104,7 @@ namespace ApuAnimalsHotel
         /// <param name="index"></param>
         public void DeleteAnimal(int index)
         {
-            listManager.DeleteAt(index);
+            base.DeleteAt(index);
         }
     }
 }
