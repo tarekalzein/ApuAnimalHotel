@@ -10,14 +10,12 @@ namespace ApuAnimalsHotel.POCO
     class Cat : Mammal
     {
         private string breed;
-        private FoodSchedule foodSchedule;
+        private FoodScheduleDictionary foodSchedule;
 
 
         public Cat() : base()
         {
-            foodSchedule = new FoodSchedule();
-            AddTestItems();
-
+            foodSchedule = new FoodScheduleDictionary();
         }
         public Cat(Cat other)
         {
@@ -62,27 +60,29 @@ namespace ApuAnimalsHotel.POCO
             return EaterType.Carnivore;
         }
 
-        public override FoodSchedule GetFoodSchedule()
-        {
-            return foodSchedule;
-        }
+        //public override FoodSchedule GetFoodSchedule()
+        //{
+        //    return foodSchedule;
+        //}
 
         public override string GetSpecies()
         {
             return "Cat";
         }
 
-        private void AddTestItems()
-        {
-            foodSchedule.AddFoodScheduleItem("Morning: wet meat!");
-            foodSchedule.AddFoodScheduleItem("Lunch: dog food and water!");
-            foodSchedule.AddFoodScheduleItem("3PM: Treats");
-            foodSchedule.AddFoodScheduleItem("Evenings: Leftovers");
-        }
-
         public override string ToString()
         {
             return String.Format("{0, -12} {1,-12}", base.ToString(), " the breed is: " + Breed);
+        }
+
+        public override FoodScheduleDictionary GetFoodSchedule()
+        {
+            return foodSchedule;
+        }
+        public override bool AddFoodScheduleItem(string[] item)
+        {
+            foodSchedule.AddFoodScheduleItem(this.Id, item);
+            return true;
         }
     }
 }

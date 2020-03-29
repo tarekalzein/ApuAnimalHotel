@@ -59,10 +59,13 @@
             this.chSpecies = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chSpecialCharacters = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnAddFood = new System.Windows.Forms.Button();
+            this.btnDeleteFoodSchedule = new System.Windows.Forms.Button();
+            this.btnEditFoodSchedule = new System.Windows.Forms.Button();
+            this.btnAddFoodSchedule = new System.Windows.Forms.Button();
             this.lbEaterType = new System.Windows.Forms.ListBox();
             this.lbFoodSchedule = new System.Windows.Forms.ListBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.btnAddFood = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.lblStaff = new System.Windows.Forms.Label();
             this.btnAddStaff = new System.Windows.Forms.Button();
@@ -380,6 +383,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnDeleteFoodSchedule);
+            this.groupBox1.Controls.Add(this.btnEditFoodSchedule);
+            this.groupBox1.Controls.Add(this.btnAddFoodSchedule);
             this.groupBox1.Controls.Add(this.lbEaterType);
             this.groupBox1.Controls.Add(this.lbFoodSchedule);
             this.groupBox1.Controls.Add(this.label6);
@@ -390,15 +396,38 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Feeding Schedule";
             // 
-            // btnAddFood
+            // btnDeleteFoodSchedule
             // 
-            this.btnAddFood.Location = new System.Drawing.Point(53, 239);
-            this.btnAddFood.Name = "btnAddFood";
-            this.btnAddFood.Size = new System.Drawing.Size(154, 33);
-            this.btnAddFood.TabIndex = 3;
-            this.btnAddFood.Text = "Add Food";
-            this.btnAddFood.UseVisualStyleBackColor = true;
-            this.btnAddFood.Click += new System.EventHandler(this.btnAddFood_Click);
+            this.btnDeleteFoodSchedule.BackgroundImage = global::ApuAnimalsHotel.Properties.Resources.Apple_64_512;
+            this.btnDeleteFoodSchedule.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnDeleteFoodSchedule.Location = new System.Drawing.Point(146, 185);
+            this.btnDeleteFoodSchedule.Name = "btnDeleteFoodSchedule";
+            this.btnDeleteFoodSchedule.Size = new System.Drawing.Size(28, 28);
+            this.btnDeleteFoodSchedule.TabIndex = 5;
+            this.btnDeleteFoodSchedule.UseVisualStyleBackColor = true;
+            this.btnDeleteFoodSchedule.Click += new System.EventHandler(this.btnDeleteFoodSchedule_Click);
+            // 
+            // btnEditFoodSchedule
+            // 
+            this.btnEditFoodSchedule.BackgroundImage = global::ApuAnimalsHotel.Properties.Resources.Artboard_29_512;
+            this.btnEditFoodSchedule.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnEditFoodSchedule.Location = new System.Drawing.Point(112, 185);
+            this.btnEditFoodSchedule.Name = "btnEditFoodSchedule";
+            this.btnEditFoodSchedule.Size = new System.Drawing.Size(28, 28);
+            this.btnEditFoodSchedule.TabIndex = 4;
+            this.btnEditFoodSchedule.UseVisualStyleBackColor = true;
+            this.btnEditFoodSchedule.Click += new System.EventHandler(this.btnEditFoodSchedule_Click);
+            // 
+            // btnAddFoodSchedule
+            // 
+            this.btnAddFoodSchedule.BackgroundImage = global::ApuAnimalsHotel.Properties.Resources.plus_512;
+            this.btnAddFoodSchedule.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAddFoodSchedule.Location = new System.Drawing.Point(78, 185);
+            this.btnAddFoodSchedule.Name = "btnAddFoodSchedule";
+            this.btnAddFoodSchedule.Size = new System.Drawing.Size(28, 28);
+            this.btnAddFoodSchedule.TabIndex = 3;
+            this.btnAddFoodSchedule.UseVisualStyleBackColor = true;
+            this.btnAddFoodSchedule.Click += new System.EventHandler(this.btnAddFoodSchedule_Click);
             // 
             // lbEaterType
             // 
@@ -424,6 +453,16 @@
             this.label6.Size = new System.Drawing.Size(60, 13);
             this.label6.TabIndex = 0;
             this.label6.Text = "Eater Type";
+            // 
+            // btnAddFood
+            // 
+            this.btnAddFood.Location = new System.Drawing.Point(53, 239);
+            this.btnAddFood.Name = "btnAddFood";
+            this.btnAddFood.Size = new System.Drawing.Size(154, 33);
+            this.btnAddFood.TabIndex = 3;
+            this.btnAddFood.Text = "Add Food";
+            this.btnAddFood.UseVisualStyleBackColor = true;
+            this.btnAddFood.Click += new System.EventHandler(this.btnAddFood_Click);
             // 
             // groupBox3
             // 
@@ -546,5 +585,8 @@
         private System.Windows.Forms.Button btnAddStaff;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.ListBox lbFoodDetails;
+        private System.Windows.Forms.Button btnAddFoodSchedule;
+        private System.Windows.Forms.Button btnDeleteFoodSchedule;
+        private System.Windows.Forms.Button btnEditFoodSchedule;
     }
 }

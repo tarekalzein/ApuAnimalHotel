@@ -19,7 +19,8 @@ namespace ApuAnimalsHotel.Interfaces
 
         EaterType GetEaterType();
 
-        FoodSchedule GetFoodSchedule();
+        //FoodSchedule GetFoodSchedule();
+        FoodScheduleDictionary GetFoodSchedule();
         string GetSpecies();
 
 

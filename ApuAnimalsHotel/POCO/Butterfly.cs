@@ -10,13 +10,12 @@ namespace ApuAnimalsHotel.POCO
     class Butterfly : Insect
     {
         private string wingColor;
-        private FoodSchedule foodSchedule;
+        private FoodScheduleDictionary foodSchedule;
 
 
         public Butterfly(): base()
         {
-            foodSchedule = new FoodSchedule();
-            AddTestItems();
+            foodSchedule = new FoodScheduleDictionary();
         }
 
         public Butterfly(Butterfly other)
@@ -57,7 +56,14 @@ namespace ApuAnimalsHotel.POCO
             return EaterType.Herbivore;
         }
 
-        public override FoodSchedule GetFoodSchedule()
+        //public override FoodSchedule GetFoodSchedule()
+        //{
+        //    return foodSchedule;
+        //}
+
+
+
+        public override FoodScheduleDictionary GetFoodSchedule()
         {
             return foodSchedule;
         }
@@ -72,12 +78,10 @@ namespace ApuAnimalsHotel.POCO
 
         }
 
-        private void AddTestItems()
+        public override bool AddFoodScheduleItem(string[] item)
         {
-            foodSchedule.AddFoodScheduleItem("Morning: flowers!");
-            foodSchedule.AddFoodScheduleItem("Lunch: Leaves!");
-            foodSchedule.AddFoodScheduleItem("3PM: Fruit juice");
-            foodSchedule.AddFoodScheduleItem("Evenings: Pollen");
+            foodSchedule.AddFoodScheduleItem(this.Id, item);
+            return true;
         }
     }
 }

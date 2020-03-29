@@ -13,15 +13,13 @@ namespace ApuAnimalsHotel.POCO
     class Dog : Mammal
     {
         private string breed;
-        private FoodSchedule foodSchedule;
+        private FoodScheduleDictionary foodSchedule;
         
         //Default constructor
         public Dog() : base()
         {
-            foodSchedule= new FoodSchedule();
-
-
-            AddTestItems();
+            //foodSchedule= new FoodSchedule();
+            foodSchedule = new FoodScheduleDictionary();
         }
         public Dog(Dog other)
         {
@@ -76,14 +74,6 @@ namespace ApuAnimalsHotel.POCO
             return EaterType.Carnivore;
         }
 
-        /// <summary>
-        /// Method to fetch the instance of foodschedule created for this dog object.
-        /// </summary>
-        /// <returns> FoodSchedule instance created for this animal</returns>
-        public override FoodSchedule GetFoodSchedule()
-        {
-            return foodSchedule;
-        }
 
         /// <summary>
         /// Method to fetch hard-coded species type.
@@ -93,15 +83,17 @@ namespace ApuAnimalsHotel.POCO
         {
             return "Dog";
         }
-        /// <summary>
-        /// This method is to create test data.
-        /// </summary>
-        private void AddTestItems()
+
+
+
+        public override FoodScheduleDictionary GetFoodSchedule()
         {
-            foodSchedule.AddFoodScheduleItem("Morning: wet meat!");
-            foodSchedule.AddFoodScheduleItem("Lunch: dog food and water!");
-            foodSchedule.AddFoodScheduleItem("3PM: Treats");
-            foodSchedule.AddFoodScheduleItem("Evenings: Leftovers");
+            return foodSchedule;
+        }
+        public override bool AddFoodScheduleItem(string[] item)
+        {
+            foodSchedule.AddFoodScheduleItem(this.Id, item);
+            return true;
         }
     }
 }

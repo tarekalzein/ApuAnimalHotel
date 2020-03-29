@@ -43,9 +43,13 @@ namespace ApuAnimalsHotel
 
         }
 
+        /// <summary>
+        /// Method that checks all the inputs from user, on success it creats an instance of Animal and updates the GUI to show the created animal.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            //Animal animal =new Animal(); //commented out: Can't instantiate abstract classes
             Animal animal = null; //Null object pattern, just to be able to use the reference in animal creation later.
 
             bool success = CheckInputs();
@@ -61,6 +65,9 @@ namespace ApuAnimalsHotel
             UpdateAnimalListView();            
         }
 
+        /// <summary>
+        /// Method to update List view with a list of animals
+        /// </summary>
         private void UpdateAnimalListView()
         {
             lvAnimalList.Items.Clear();
@@ -100,7 +107,7 @@ namespace ApuAnimalsHotel
                         break;
                 }
 
-                //Create the string (row) to be added in the ListView.
+                //Create the string (row) to be added in the ListView. Each animal is a row.
                 var row = new string[]
                 {
                      animal.Id.ToString(),
@@ -117,9 +124,6 @@ namespace ApuAnimalsHotel
                 lvAnimalList.Items.Add(lvitem);
 
                 ClearList();
-
-
-
             }
         }
 
@@ -142,9 +146,14 @@ namespace ApuAnimalsHotel
             txtChar2.Visible = false;
         }
 
-
+        /// <summary>
+        /// Method to load an image of the animal
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
+            //this method is not complete yet. later it shall copy the image to database and link it to the created animal via a dictionary.
             string imageLocation = "";
 
             try
@@ -161,10 +170,14 @@ namespace ApuAnimalsHotel
             catch(Exception)
             {
 
-            }
-           
+            }           
         }
 
+        /// <summary>
+        /// Reads the user seleciton in lbObject (Dog, Cat, etc) and changes the visual labels of special characters accordingly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lbObject_SelectedIndexChanged(object sender, EventArgs e)
         {
             //enable text box for species specific character.
@@ -178,7 +191,6 @@ namespace ApuAnimalsHotel
                 case MammalSpecies.Dog:
                     lblChar2.Text = "Breed";
                     lblChar1.Text = MAMMAL_CHAR_LABEL;
-
                     break;
 
                 case MammalSpecies.Cat:
@@ -194,7 +206,6 @@ namespace ApuAnimalsHotel
                 case InsectSpecies.Butterfly:
                     lblChar2.Text = "Wings Color";
                     lblChar1.Text = INSECT_CHAR_LABEL;
-
                     break;
             }
         }
@@ -221,6 +232,9 @@ namespace ApuAnimalsHotel
         {
         }
 
+        /// <summary>
+        /// My own initialization of GUI items.
+        /// </summary>
         private void InitializeGui()
         {
 
@@ -306,7 +320,14 @@ namespace ApuAnimalsHotel
                     break;
             }
             animalManager.Add(animal);
+
+            //Uncomment to create test lists of food schedule.
+            //animal.AddFoodScheduleItem(animal.Id, FoodScheduleTest.AddTestFoodSchedule(animal));
+            
         }
+        /// <summary>
+        /// Creates an instance of animal according to its type.
+        /// </summary>
         private void CreateAnimalObjectList()
         {
             //Enable text boxes that are disabled by default.
@@ -322,8 +343,6 @@ namespace ApuAnimalsHotel
                 Array insectsArray = typeof(InsectSpecies).GetEnumValues();
                 foreach (InsectSpecies insectSpecies in insectsArray)
                     lbObject.Items.Add(insectSpecies);
-
-
             }
 
             else
@@ -349,10 +368,8 @@ namespace ApuAnimalsHotel
                                 lbObject.Items.Add(insectSpecies);
                             break;
                     }
-                } 
-                   
-            }
-            
+                }                    
+            }            
         }
         //Method to validate input in Name field
         private string CheckName(out bool success)
@@ -455,23 +472,15 @@ namespace ApuAnimalsHotel
 
             //Get the animal object from animal manager in the selected index.
             if(lvAnimalList.SelectedItems.Count>0) // This if statement is to prevent nullpointerexception on listview index change. when we change selection this will raise the selecedindexchanged twice causing error.
-            {
-               
-                Animal animal = animalManager.GetElementAtPosition(lvAnimalList.SelectedIndices[0]); //No need to find by ID anymore since both lists are identical
-
+            {               
+                Animal animal = animalManager.GetElementAtPosition(lvAnimalList.SelectedIndices[0]);
                 lbEaterType.Items.Add(animal.GetEaterType());// Put the Eater type in the eater type label
-
-                for (int i = 0; i < animal.GetFoodSchedule().Count; i++)
-                {
-                    string test = "[" + (i + 1) + "] " + animal.GetFoodSchedule().GetFoodSchedule(i); //i+1 to start counting from 1 not from 0
-                    lbFoodSchedule.Items.Add(test);
-                }
+                UpdateLbFoodSchedule(animal);               
             }
             else
             {
                 return;
             }
-
         }
 
         /// <summary>
@@ -564,6 +573,83 @@ namespace ApuAnimalsHotel
             }
             
 
+        }
+
+        /// <summary>
+        /// Add a food schedule of the animal selected in lvAnimalList.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAddFoodSchedule_Click(object sender, EventArgs e)
+        {
+            if(lvAnimalList.SelectedItems.Count>0)
+            {
+                FoodScheduleForm foodScheduleForm = new FoodScheduleForm();
+
+                if (foodScheduleForm.ShowDialog() == DialogResult.OK)
+                {
+                    string[] foodScheduleItems = foodScheduleForm.GetFoodScheduleList();
+                    Animal animal = animalManager.GetElementAtPosition(lvAnimalList.SelectedIndices[0]);
+                    animal.AddFoodScheduleItem(foodScheduleItems);
+
+                    UpdateLbFoodSchedule(animal);
+                }
+            }            
+        }
+
+        /// <summary>
+        /// Updates the food schedule list.
+        /// </summary>
+        /// <param name="animal"></param>
+        private void UpdateLbFoodSchedule(Animal animal)
+        {
+            lbFoodSchedule.Items.Clear();
+            int i = 1;
+            foreach (string item in animal.GetFoodSchedule().GetFoodScheduleById(animal.Id))
+            {
+                string test = "[" + (i) + "] " + item;
+                lbFoodSchedule.Items.Add(test);
+                i++;
+            }
+
+        }
+
+        /// <summary>
+        /// Edit the selected animal's food schedule by fetching the list from the animal object and show it in the food schedule form. returns the edited food schedule.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEditFoodSchedule_Click(object sender, EventArgs e)
+        {
+            if (lvAnimalList.SelectedItems.Count > 0)
+            {
+                Animal animal = animalManager.GetElementAtPosition(lvAnimalList.SelectedIndices[0]);
+                FoodScheduleForm foodScheduleForm = new FoodScheduleForm(animal.GetFoodSchedule().GetFoodScheduleById(animal.Id));
+                if (foodScheduleForm.ShowDialog() == DialogResult.OK)
+                {
+                    string[] foodScheduleItems = foodScheduleForm.GetFoodScheduleList();
+                    animal.AddFoodScheduleItem(foodScheduleItems);
+
+                    UpdateLbFoodSchedule(animal);
+
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// Removes the food schedule of the selected animal by removing its key, value from dictionary.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDeleteFoodSchedule_Click(object sender, EventArgs e)
+        {
+            if (lvAnimalList.SelectedItems.Count > 0)
+            {
+                Animal animal = animalManager.GetElementAtPosition(lvAnimalList.SelectedIndices[0]);
+                animal.GetFoodSchedule().RemoveFoodItems(animal.Id);
+                UpdateLbFoodSchedule(animal);
+            }
         }
     }
 }

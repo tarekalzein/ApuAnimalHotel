@@ -10,6 +10,7 @@ namespace ApuAnimalsHotel.POCO
 {
     abstract class Animal : IAnimal
     {
+
         private string name;
         private int id;
         private double age;
@@ -23,7 +24,7 @@ namespace ApuAnimalsHotel.POCO
             name = "";
             age = 0;
             gender = GenderType.Unknown;
-             
+
         }
 
         //Constructor to copy object.
@@ -55,9 +56,14 @@ namespace ApuAnimalsHotel.POCO
 
         public abstract EaterType GetEaterType();
 
-        public abstract FoodSchedule GetFoodSchedule();
+        //public abstract FoodSchedule GetFoodSchedule();
+
+        public abstract FoodScheduleDictionary GetFoodSchedule();  
+        
 
         public abstract string GetSpecies();
+
+        public abstract bool AddFoodScheduleItem(string[] items); 
 
         public override string ToString()
         {
