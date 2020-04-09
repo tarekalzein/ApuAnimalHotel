@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -649,6 +650,33 @@ namespace ApuAnimalsHotel
                 Animal animal = animalManager.GetElementAtPosition(lvAnimalList.SelectedIndices[0]);
                 animal.GetFoodSchedule().RemoveFoodItems(animal.Id);
                 UpdateLbFoodSchedule(animal);
+            }
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string ChosenFile = "";
+            openFileDialog1.FileName = "";
+
+            openFileDialog1.Filter = "XML Files (*.xml)|*.xml|Binary Files (*.bin)|*.bin";
+            ChosenFile = openFileDialog1.FileName;
+            if(openFileDialog1.ShowDialog()==DialogResult.OK)
+            {
+                //Check file extension xml/bin and run action accordingly
+                if (Path.GetExtension(openFileDialog1.FileName) ==".xml")
+                {
+                    MessageBox.Show("Chosen file is XML");//replace with real code
+                }
+                else if (Path.GetExtension(openFileDialog1.FileName) == ".bin")
+                {
+                    MessageBox.Show("Chosen file is bin"); //replace with real code.
+                }
+                //The app should remember what type is opened so it can save it with the same extension.
             }
         }
     }
