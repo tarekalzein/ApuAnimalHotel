@@ -8,6 +8,7 @@ using ApuAnimalsHotel.Interfaces;
 
 namespace ApuAnimalsHotel.POCO
 {
+    [Serializable]
     abstract class Animal : IAnimal
     {
 

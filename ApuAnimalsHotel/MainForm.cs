@@ -650,6 +650,7 @@ namespace ApuAnimalsHotel
                 Animal animal = animalManager.GetElementAtPosition(lvAnimalList.SelectedIndices[0]);
                 animal.GetFoodSchedule().RemoveFoodItems(animal.Id);
                 UpdateLbFoodSchedule(animal);
+
             }
         }
 
@@ -662,21 +663,64 @@ namespace ApuAnimalsHotel
         {
             string ChosenFile = "";
             openFileDialog1.FileName = "";
-
             openFileDialog1.Filter = "XML Files (*.xml)|*.xml|Binary Files (*.bin)|*.bin";
-            ChosenFile = openFileDialog1.FileName;
-            if(openFileDialog1.ShowDialog()==DialogResult.OK)
+
+            try 
             {
-                //Check file extension xml/bin and run action accordingly
-                if (Path.GetExtension(openFileDialog1.FileName) ==".xml")
+                ChosenFile = openFileDialog1.FileName;
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    MessageBox.Show("Chosen file is XML");//replace with real code
+                    //Check file extension xml/bin and run action accordingly
+                    if (Path.GetExtension(openFileDialog1.FileName) == ".xml")
+                    {
+                        MessageBox.Show("Chosen file is XML");//replace with real code
+                    }
+                    else if (Path.GetExtension(openFileDialog1.FileName) == ".bin")
+                    {
+                        MessageBox.Show("Chosen file is bin"); //replace with real code.
+                    }
+                    //The app should remember what type is opened so it can save it with the same extension.
                 }
-                else if (Path.GetExtension(openFileDialog1.FileName) == ".bin")
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error opening the selected file");
+            }
+        }
+
+        private void binaryFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.Filter = "Binary file (*.bin)|*.bin";
+            saveFileDialog1.FileName = "SavedData";
+            saveFileDialog1.ShowDialog();
+            //Check if file name is not empty and proceed with saving
+        }
+
+        private void textFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.Filter = "txt file (*.txt)|*.txt";
+            saveFileDialog1.FileName = "SavedData" + "-" + DateTime.Now.ToString("yyyMMddHHmmss"); //Default name
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if (!string.IsNullOrEmpty(saveFileDialog1.FileName))
                 {
-                    MessageBox.Show("Chosen file is bin"); //replace with real code.
-                }
-                //The app should remember what type is opened so it can save it with the same extension.
+                    StreamWriter writer = new StreamWriter(saveFileDialog1.FileName);
+                    try
+                    {
+                        writer.WriteLine("test"); //replace with serialization code.
+
+                        //Check if file name is not empty and proceed with saving
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Error writing to file");
+                    }
+                    finally
+                    {
+                        writer.Close();
+                    }
+                }                
             }
         }
     }
