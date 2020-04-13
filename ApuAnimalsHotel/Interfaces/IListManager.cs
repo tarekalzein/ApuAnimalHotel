@@ -61,5 +61,10 @@ namespace ApuAnimalsHotel.Interfaces
         /// <returns>List of strings</returns>
         List<string> ToStringList();
 
+        void BinarySerialize(string fileName);
+
+        void BinaryDeserialize(string fileName);
+        void XMLSerialize(string fileName);
+
     }
 }

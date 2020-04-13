@@ -9,7 +9,8 @@ namespace ApuAnimalsHotel
     /// <summary>
     /// Container class that takes an animal id as key and holds an array of food schedule (as strings)
     /// </summary>
-    class FoodScheduleDictionary
+    [Serializable]
+    public class FoodScheduleDictionary
     {
         Dictionary<string, string[]> m_foodDictionary;
 

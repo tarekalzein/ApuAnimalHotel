@@ -7,7 +7,8 @@ using ApuAnimalsHotel.Enums;
 
 namespace ApuAnimalsHotel.POCO
 {
-    class Cat : Mammal
+    [Serializable]
+    public class Cat : Mammal
     {
         private string breed;
         private FoodScheduleDictionary foodSchedule;

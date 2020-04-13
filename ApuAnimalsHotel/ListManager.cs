@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ApuAnimalsHotel.Interfaces;
 using ApuAnimalsHotel.POCO;
+using ApuAnimalsHotel.UtilitiesLibrary;
 
 namespace ApuAnimalsHotel
 {
@@ -23,9 +24,10 @@ namespace ApuAnimalsHotel
             m_list = new List<T>();
         }
         /// <summary>
-        /// Method to return count of list items.
+        /// Method to return count of list items. returns 0 if list is null or =0.
         /// </summary>
-        public int Count => m_list.Count;
+        public int Count => m_list!=null ? m_list.Count : -1;
+
 
         /// <summary>
         /// Adds an object of Type into the list.
@@ -177,6 +179,21 @@ namespace ApuAnimalsHotel
                 throw e;
                 //Code to handle exception.
             }            
-        }        
+        }
+
+        public void BinarySerialize(string fileName)
+        {
+            SerializerHelper.Serialize(m_list, SerializeFormat.Bin, fileName);
+        }
+
+        public void BinaryDeserialize(string fileName)
+        {
+            m_list = SerializerHelper.Deserialize<List<T>>(fileName, SerializeFormat.Bin);
+        }
+
+        public void XMLSerialize(string fileName)
+        {
+            SerializerHelper.Serialize(m_list, SerializeFormat.XML, fileName);
+        }
     }
 }

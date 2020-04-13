@@ -563,6 +563,7 @@
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.newToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.newToolStripMenuItem.Text = "New";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
@@ -593,14 +594,14 @@
             // textFileToolStripMenuItem
             // 
             this.textFileToolStripMenuItem.Name = "textFileToolStripMenuItem";
-            this.textFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.textFileToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.textFileToolStripMenuItem.Text = "Text File";
             this.textFileToolStripMenuItem.Click += new System.EventHandler(this.textFileToolStripMenuItem_Click);
             // 
             // binaryFileToolStripMenuItem
             // 
             this.binaryFileToolStripMenuItem.Name = "binaryFileToolStripMenuItem";
-            this.binaryFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.binaryFileToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.binaryFileToolStripMenuItem.Text = "Binary File";
             this.binaryFileToolStripMenuItem.Click += new System.EventHandler(this.binaryFileToolStripMenuItem_Click);
             // 

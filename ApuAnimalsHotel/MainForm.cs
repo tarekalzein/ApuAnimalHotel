@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ApuAnimalsHotel.Enums;
 using ApuAnimalsHotel.POCO;
+using ApuAnimalsHotel.UtilitiesLibrary;
 
 namespace ApuAnimalsHotel
 {
@@ -63,7 +64,8 @@ namespace ApuAnimalsHotel
                     CreateAnimalInstance(animalObjType, animal);
                 }
             }
-            UpdateAnimalListView();            
+            UpdateGUI();
+
         }
 
         /// <summary>
@@ -677,7 +679,13 @@ namespace ApuAnimalsHotel
                     }
                     else if (Path.GetExtension(openFileDialog1.FileName) == ".bin")
                     {
-                        MessageBox.Show("Chosen file is bin"); //replace with real code.
+                        //MessageBox.Show("Chosen file is bin"); //replace with real code.
+                        animalManager.BinaryDeserialize(openFileDialog1.FileName);
+                        if (animalManager.Count <= 0)
+                            MessageBox.Show("Error importing the file, Please check the content of the file.");
+                        UpdateAnimalListView();
+                        lbFoodSchedule.Items.Clear();
+                        lbEaterType.Items.Clear();
                     }
                     //The app should remember what type is opened so it can save it with the same extension.
                 }
@@ -692,36 +700,46 @@ namespace ApuAnimalsHotel
         {
             saveFileDialog1.Filter = "Binary file (*.bin)|*.bin";
             saveFileDialog1.FileName = "SavedData";
-            saveFileDialog1.ShowDialog();
+            //saveFileDialog1.ShowDialog();
             //Check if file name is not empty and proceed with saving
+            if(!string.IsNullOrEmpty(saveFileDialog1.FileName) && saveFileDialog1.ShowDialog()==DialogResult.OK )
+            {
+                animalManager.BinarySerialize(saveFileDialog1.FileName);
+
+            }
+
+
         }
 
         private void textFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.Filter = "txt file (*.txt)|*.txt";
+            //saveFileDialog1.Filter = "txt file (*.txt)|*.txt";
+            saveFileDialog1.Filter = "xml file (*.xml)|*.xml";
+
             saveFileDialog1.FileName = "SavedData" + "-" + DateTime.Now.ToString("yyyMMddHHmmss"); //Default name
 
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            if (!string.IsNullOrEmpty(saveFileDialog1.FileName) && saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                if (!string.IsNullOrEmpty(saveFileDialog1.FileName))
-                {
-                    StreamWriter writer = new StreamWriter(saveFileDialog1.FileName);
-                    try
-                    {
-                        writer.WriteLine("test"); //replace with serialization code.
+                animalManager.XMLSerialize(saveFileDialog1.FileName);
 
-                        //Check if file name is not empty and proceed with saving
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("Error writing to file");
-                    }
-                    finally
-                    {
-                        writer.Close();
-                    }
-                }                
             }
+
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            animalManager = new AnimalManager();
+            recipeManager = new RecipeManager();
+            UpdateGUI();
+                      
+        }
+
+        private void UpdateGUI()
+        {
+            UpdateAnimalListView();
+            lbFoodDetails.Items.Clear();
+            lbFoodSchedule.Items.Clear();
+            lbEaterType.Items.Clear();
         }
     }
 }

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ApuAnimalsHotel.UtilitiesLibrary
 {
-    class BinSerializerUtility
+    public static class BinSerializerUtility
     {
+
     }
 }

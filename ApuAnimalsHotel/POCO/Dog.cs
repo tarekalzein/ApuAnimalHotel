@@ -10,7 +10,8 @@ namespace ApuAnimalsHotel.POCO
     /// <summary>
     /// A Class for the creation of Dog instance. It inherirts the properties from Animal and mammal, it has special property breed. 
     /// </summary>
-    class Dog : Mammal
+    [Serializable]
+    public class Dog : Mammal
     {
         private string breed;
         private FoodScheduleDictionary foodSchedule;

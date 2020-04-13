@@ -12,7 +12,8 @@ namespace ApuAnimalsHotel.POCO
     /// Abstract class that inherits the abstract class Animal and the interface IAnimal.
     /// In addition to the properties in Animal, it has special property TeethCount. 
     /// </summary>
-    abstract class Insect : Animal
+    [Serializable]
+    public abstract class Insect : Animal
     {
         private int countOfLegs;
 

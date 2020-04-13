@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using ApuAnimalsHotel.Enums;
 using ApuAnimalsHotel.Interfaces;
 
 namespace ApuAnimalsHotel.POCO
 {
     [Serializable]
-    abstract class Animal : IAnimal
+    public abstract class Animal : IAnimal
     {
-
         private string name;
         private int id;
         private double age;
@@ -22,9 +22,9 @@ namespace ApuAnimalsHotel.POCO
         public Animal()
         {
            
-            name = "";
-            age = 0;
-            gender = GenderType.Unknown;
+            //name = "";
+            //age = 0;
+            //gender = GenderType.Unknown;
 
         }
 
