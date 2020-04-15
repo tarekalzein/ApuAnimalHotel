@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace ApuAnimalsHotel.UtilitiesLibrary
@@ -39,31 +40,21 @@ namespace ApuAnimalsHotel.UtilitiesLibrary
 
         private static bool SerializeToXml<T>(T t, string filePath)
         {
-            //XmlSerializer xmlSerializer = new XmlSerializer(t.GetType());
-            //TextWriter writer = new StreamWriter(filePath);
 
-            //try
-            //{
-            //    xmlSerializer.Serialize(writer, t);
-            //}
-            //catch(Exception)
-            //{
-            //    throw new Exception("Error serializing data into XML");    
-            //}
-            //finally
-            //{
-            //    if (writer != null)
-            //        writer.Close();
-            //}
-            //return true;
+            try
+            {
+                using (Stream stream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                {
+                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
+                    xmlSerializer.Serialize(stream, t);
+                    return true;
+                }
 
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
-            TextWriter writer = new StreamWriter(filePath);
-            xmlSerializer.Serialize(writer, t);
-            if (writer != null)
-                writer.Close();
-            return true;
-          
+            }
+            catch(XmlException)
+            {
+                throw new XmlException("Error exporting data to XML file");
+            }
 
         }
 
@@ -78,9 +69,23 @@ namespace ApuAnimalsHotel.UtilitiesLibrary
 
         }
 
-        private static T DeserializeXml<T>(string data)
+        private static T DeserializeXml<T>(string filePath)
         {
-            throw new NotImplementedException();
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
+            TextReader reader = new StreamReader(filePath);
+
+            try
+            {
+                return (T)xmlSerializer.Deserialize(reader);
+            }
+            catch
+            {
+                throw new XmlException("Error reading from file");
+            }
+            finally
+            {
+                if (reader != null) reader.Close();
+            }
         }
 
         private static T DeserializeBin<T>(string filePath, out string errorMessage)

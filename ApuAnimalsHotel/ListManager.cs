@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using ApuAnimalsHotel.Interfaces;
 using ApuAnimalsHotel.POCO;
 using ApuAnimalsHotel.UtilitiesLibrary;
@@ -13,6 +14,7 @@ namespace ApuAnimalsHotel
     public class ListManager<T> : IListManager<T>
         
     {
+        [XmlArray]
         private List<T> m_list;
 
 
@@ -193,7 +195,13 @@ namespace ApuAnimalsHotel
 
         public void XMLSerialize(string fileName)
         {
-            SerializerHelper.Serialize(m_list, SerializeFormat.XML, fileName);
+            SerializerHelper.Serialize<List<T>>(m_list, SerializeFormat.XML, fileName);
         }
+        public void XMLDesrialize(string fileName)
+        {
+            m_list = SerializerHelper.Deserialize<List<T>>(fileName, SerializeFormat.XML);
+        }
+
+
     }
 }

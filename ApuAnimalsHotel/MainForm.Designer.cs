@@ -579,6 +579,7 @@
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
@@ -625,12 +626,14 @@
             this.importFromXMLFileToolStripMenuItem.Name = "importFromXMLFileToolStripMenuItem";
             this.importFromXMLFileToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.importFromXMLFileToolStripMenuItem.Text = "Import from XML File";
+            this.importFromXMLFileToolStripMenuItem.Click += new System.EventHandler(this.importFromXMLFileToolStripMenuItem_Click);
             // 
             // exportToXMLFileToolStripMenuItem
             // 
             this.exportToXMLFileToolStripMenuItem.Name = "exportToXMLFileToolStripMenuItem";
             this.exportToXMLFileToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.exportToXMLFileToolStripMenuItem.Text = "Export to XML File";
+            this.exportToXMLFileToolStripMenuItem.Click += new System.EventHandler(this.exportToXMLFileToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 

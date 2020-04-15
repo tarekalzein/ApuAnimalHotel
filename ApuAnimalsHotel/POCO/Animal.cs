@@ -9,6 +9,11 @@ using ApuAnimalsHotel.Interfaces;
 
 namespace ApuAnimalsHotel.POCO
 {
+    [XmlInclude(typeof(Dog))]
+    [XmlInclude(typeof(Cat))]
+    [XmlInclude(typeof(Bee))]
+    [XmlInclude(typeof(Butterfly))]
+
     [Serializable]
     public abstract class Animal : IAnimal
     {
@@ -20,11 +25,7 @@ namespace ApuAnimalsHotel.POCO
 
         //empty constructor with some initialization
         public Animal()
-        {
-           
-            //name = "";
-            //age = 0;
-            //gender = GenderType.Unknown;
+        {                      
 
         }
 

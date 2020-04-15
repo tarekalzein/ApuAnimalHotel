@@ -23,6 +23,8 @@ namespace ApuAnimalsHotel
         private AnimalManager animalManager = new AnimalManager();
         private RecipeManager recipeManager = new RecipeManager();
 
+        private string openFileName=null;
+
 
         public MainForm()
         {
@@ -663,30 +665,30 @@ namespace ApuAnimalsHotel
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string ChosenFile = "";
             openFileDialog1.FileName = "";
-            openFileDialog1.Filter = "XML Files (*.xml)|*.xml|Binary Files (*.bin)|*.bin";
+            openFileDialog1.Filter = "Text Files (*.txt)|*.txt|Binary Files (*.bin)|*.bin";
 
             try 
             {
-                ChosenFile = openFileDialog1.FileName;
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
+                    openFileName = openFileDialog1.FileName;
                     //Check file extension xml/bin and run action accordingly
-                    if (Path.GetExtension(openFileDialog1.FileName) == ".xml")
+                    if (Path.GetExtension(openFileName) == ".txt")
                     {
-                        MessageBox.Show("Chosen file is XML");//replace with real code
+                        //Do something....
                     }
-                    else if (Path.GetExtension(openFileDialog1.FileName) == ".bin")
+                    else if (Path.GetExtension(openFileName) == ".bin")
                     {
                         //MessageBox.Show("Chosen file is bin"); //replace with real code.
-                        animalManager.BinaryDeserialize(openFileDialog1.FileName);
-                        if (animalManager.Count <= 0)
-                            MessageBox.Show("Error importing the file, Please check the content of the file.");
-                        UpdateAnimalListView();
-                        lbFoodSchedule.Items.Clear();
-                        lbEaterType.Items.Clear();
+                        animalManager.BinaryDeserialize(openFileName);
+                        
                     }
+                    if (animalManager.Count <= 0)
+                        MessageBox.Show("Error importing the file, Please check the content of the file.");
+                    UpdateAnimalListView();
+                    lbFoodSchedule.Items.Clear();
+                    lbEaterType.Items.Clear();
                     //The app should remember what type is opened so it can save it with the same extension.
                 }
             }
@@ -713,16 +715,16 @@ namespace ApuAnimalsHotel
 
         private void textFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //saveFileDialog1.Filter = "txt file (*.txt)|*.txt";
-            saveFileDialog1.Filter = "xml file (*.xml)|*.xml";
+            saveFileDialog1.Filter = "txt file (*.txt)|*.txt";
+            //saveFileDialog1.Filter = "xml file (*.xml)|*.xml"; //For testing...xml is to be used with recipes.
 
             saveFileDialog1.FileName = "SavedData" + "-" + DateTime.Now.ToString("yyyMMddHHmmss"); //Default name
 
-            if (!string.IsNullOrEmpty(saveFileDialog1.FileName) && saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                animalManager.XMLSerialize(saveFileDialog1.FileName);
+            //if (!string.IsNullOrEmpty(saveFileDialog1.FileName) && saveFileDialog1.ShowDialog() == DialogResult.OK)
+            //{
+            //    animalManager.XMLSerialize(saveFileDialog1.FileName);
 
-            }
+            //}
 
         }
 
@@ -731,6 +733,7 @@ namespace ApuAnimalsHotel
             animalManager = new AnimalManager();
             recipeManager = new RecipeManager();
             UpdateGUI();
+            openFileName = null; //Reset open file name.
                       
         }
 
@@ -740,6 +743,70 @@ namespace ApuAnimalsHotel
             lbFoodDetails.Items.Clear();
             lbFoodSchedule.Items.Clear();
             lbEaterType.Items.Clear();
+        }
+
+        private void exportToXMLFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.Filter = "XML file (*.xml)|*.xml";
+            saveFileDialog1.FileName = "RecipeData";
+
+            if (!string.IsNullOrEmpty(saveFileDialog1.FileName) && saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                recipeManager.XMLSerialize(saveFileDialog1.FileName);
+            }
+
+        }
+
+        private void importFromXMLFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.FileName = "";
+            openFileDialog1.Filter = "Xml file (*.xml)| *.xml";
+
+            try
+            {
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    recipeManager.XMLDesrialize(openFileDialog1.FileName);
+                }
+            }
+            catch
+            {
+                throw (new FileLoadException("Error importing the file"));
+            }
+            UpdateGUI();
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            /*
+             * if file not saved earlier, save the file: now it will save it as bin.
+             * This can be extended to open the saveFileDialog with possiblity to choose file type.
+             */
+            if (openFileName==null) 
+            {
+                binaryFileToolStripMenuItem_Click( sender, e);
+            }
+            else
+            {
+                if (Path.GetExtension(openFileName) == ".txt")
+                {
+                    //Do something....
+                }
+                else if (Path.GetExtension(openFileName) == ".bin")
+                {
+                    try
+                    {
+                        animalManager.BinarySerialize(openFileName);
+                        MessageBox.Show("Saved");
+
+                    }
+                    catch
+                    {
+                        throw new Exception("Erorr saving the file");
+                    }
+
+                }
+            }            
         }
     }
 }
