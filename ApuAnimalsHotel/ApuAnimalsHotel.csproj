@@ -98,9 +98,7 @@
       <DependentUpon>RecipeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="RecipeManager.cs" />
-    <Compile Include="UtilitiesLibrary\BinSerializerUtility.cs" />
     <Compile Include="UtilitiesLibrary\SerializerHelper.cs" />
-    <Compile Include="UtilitiesLibrary\XMLSerializerUtility.cs" />
     <Compile Include="WelcomeForm.cs">
       <SubType>Form</SubType>
     </Compile>

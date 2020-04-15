@@ -8,7 +8,9 @@ namespace ApuAnimalsHotel.POCO
 {
     public class Recipe
     {
-        private ListManager<string> m_ingredients;
+        //private ListManager<string> m_ingredients;
+        private List<string> m_ingredients;
+
         private string name;
 
         /// <summary>
@@ -16,13 +18,15 @@ namespace ApuAnimalsHotel.POCO
         /// </summary>
         public Recipe()
         {
-            m_ingredients = new ListManager<string>();
+            //m_ingredients = new ListManager<string>();
+            m_ingredients = new List<string>();
+
             name = Name;
         }
         /// <summary>
         /// Getter for the list
         /// </summary>
-        public ListManager<string> Ingredients { get; }
+
 
         /// <summary>
         /// Getter for the Name property
@@ -47,7 +51,9 @@ namespace ApuAnimalsHotel.POCO
             string ingredients = "";
             for(int i=0; i<m_ingredients.Count; i++)
             {
-                ingredients += m_ingredients.GetAt(i) + ". "; ;
+                //ingredients += m_ingredients.GetAt(i) + ". "; ;
+                ingredients += m_ingredients[i] + ". "; ;
+
             }
             return Name + ": " + ingredients;
         }

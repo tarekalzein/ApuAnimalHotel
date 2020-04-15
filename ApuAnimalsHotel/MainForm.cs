@@ -707,10 +707,7 @@ namespace ApuAnimalsHotel
             if(!string.IsNullOrEmpty(saveFileDialog1.FileName) && saveFileDialog1.ShowDialog()==DialogResult.OK )
             {
                 animalManager.BinarySerialize(saveFileDialog1.FileName);
-
             }
-
-
         }
 
         private void textFileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -752,9 +749,15 @@ namespace ApuAnimalsHotel
 
             if (!string.IsNullOrEmpty(saveFileDialog1.FileName) && saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                recipeManager.XMLSerialize(saveFileDialog1.FileName);
+                try
+                {
+                    recipeManager.XMLSerialize(saveFileDialog1.FileName);
+                }
+                catch
+                {
+                    MessageBox.Show("Error exporting data to XML file");
+                }
             }
-
         }
 
         private void importFromXMLFileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -767,13 +770,20 @@ namespace ApuAnimalsHotel
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     recipeManager.XMLDesrialize(openFileDialog1.FileName);
+                    if(recipeManager.Count>0)
+                    {
+                        for (int i = 0; i < recipeManager.Count; i++)
+                        {
+                            lbFoodDetails.Items.Add(recipeManager.GetAt(i));
+                        }
+                    }                      
                 }
             }
             catch
-            {
-                throw (new FileLoadException("Error importing the file"));
+            {                
+                MessageBox.Show("Error importing data from XML file, please check the file or its content");
             }
-            UpdateGUI();
+            //UpdateGUI();
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -798,7 +808,6 @@ namespace ApuAnimalsHotel
                     {
                         animalManager.BinarySerialize(openFileName);
                         MessageBox.Show("Saved");
-
                     }
                     catch
                     {

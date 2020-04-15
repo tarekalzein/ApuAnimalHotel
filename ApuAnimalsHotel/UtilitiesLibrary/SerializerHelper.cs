@@ -40,20 +40,11 @@ namespace ApuAnimalsHotel.UtilitiesLibrary
 
         private static bool SerializeToXml<T>(T t, string filePath)
         {
-
-            try
+            using (Stream stream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
             {
-                using (Stream stream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
-                {
-                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
-                    xmlSerializer.Serialize(stream, t);
-                    return true;
-                }
-
-            }
-            catch(XmlException)
-            {
-                throw new XmlException("Error exporting data to XML file");
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
+                xmlSerializer.Serialize(stream, t);
+                return true;
             }
 
         }
