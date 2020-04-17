@@ -66,7 +66,9 @@ namespace ApuAnimalsHotel.Interfaces
         void BinaryDeserialize(string fileName);
         void XMLSerialize(string fileName);
 
+        void TextSerialize(string fileName);
 
+        void TextDeserialize(string fileName);
 
     }
 }

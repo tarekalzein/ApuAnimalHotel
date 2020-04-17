@@ -5,10 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using ApuAnimalsHotel.POCO;
 using ApuAnimalsHotel.Interfaces;
+using System.IO;
+using ApuAnimalsHotel.Enums;
+using ApuAnimalsHotel.UtilitiesLibrary;
 
 namespace ApuAnimalsHotel
 {
-    class AnimalManager : ListManager<Animal>
+    public class AnimalManager : ListManager<Animal>
     {
 
 
@@ -105,6 +108,111 @@ namespace ApuAnimalsHotel
         public void DeleteAnimal(int index)
         {
             base.DeleteAt(index);
+        }
+
+        public void SaveToTxt(string filePath)
+        {
+            SerializerHelper.SerializeToText(filePath, this);
+        }
+        //This Method can be re-done with a helper class to create instances of Animal.
+        public void ReadFromTxt(string filePath)
+        {
+            string line;
+            GenderType gender=GenderType.Unknown;
+            StreamReader reader = new StreamReader(filePath);
+            while((line=reader.ReadLine()) !=null)
+            {
+                Animal animal = null;
+                string[] words = line.Split(',');
+                string type = words[0].Split(':')[1];
+                string name= words[1].Split(':')[1];
+                int age= int.Parse(words[2].Split(':')[1]);
+                string genderString= words[3].Split(':')[1];
+
+                
+                System.Diagnostics.Debug.WriteLine(type+name+genderString);
+                switch (genderString)
+                {
+                    case "Male":
+                        gender = GenderType.Male;
+                        break;
+                    case "Female":
+                        gender = GenderType.Female;
+                        break;
+                    case "Unknown":
+                        gender = GenderType.Unknown;
+                        break;
+                }
+                    
+                string char1= words[4].Split(':')[1];
+                string char2= words[5].Split(':')[1];
+
+                string foodSheduleString = words[6].Split(':')[1];
+                string[] foodSchedule = foodSheduleString.Split('[',']').Where(x => !string.IsNullOrEmpty(x)).ToArray();
+
+                switch (type)
+                {
+                    case "Dog":
+                        animal = new Dog
+                        {
+                            Age = age,
+                            Name = name,
+                            TeethCount = int.Parse(char1),
+                            Category = CategoryType.Mammal,
+                            Breed = char2,
+                            Gender = gender
+                        };
+                        break;
+
+                    case "Cat":
+                        animal = new Cat
+                        {
+                            Age = age,
+                            Name = name,
+                            TeethCount = int.Parse(char1),
+                            Category = CategoryType.Mammal,
+                            Breed = char2,
+                            Gender = gender
+                        };
+                        break;
+
+                    case "Bee":
+                        animal = new Bee
+                        {
+                            Age = age,
+                            Name = name,
+                            Category = CategoryType.Insect,
+                            CountOfLegs = int.Parse(char1),
+                            BeeSpecies = char2,
+                            Gender = gender,
+                        };
+                        break;
+
+                    case "Butterfly":
+                        animal = new Butterfly
+                        {
+                            Age = age,
+                            Name = name,
+                            Category = CategoryType.Insect,
+                            CountOfLegs = int.Parse(char1),
+                            WingColor = char2,
+                            Gender = gender,
+                        };
+                        break;
+                }
+                //foreach(string item in foodSchedule)
+                //{
+                //    System.Diagnostics.Debug.WriteLine(item);
+
+                //}
+                //string[] test = { "test1", "test2" };
+
+
+                animal.AddFoodScheduleItem(foodSchedule);
+                this.Add(animal);               
+
+            }
+            reader.Close();
         }
     }
 }

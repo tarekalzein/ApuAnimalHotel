@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using ApuAnimalsHotel.Enums;
 using ApuAnimalsHotel.Interfaces;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace ApuAnimalsHotel.POCO
 {
@@ -50,8 +52,9 @@ namespace ApuAnimalsHotel.POCO
         //Getters and setters
         public string Name { get; set; }
         public double Age { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
         public CategoryType Category { get; set; }
-
+        [JsonConverter(typeof(StringEnumConverter))]
         public GenderType Gender { get; set; }
 
         public int Id { get; set; }

@@ -613,6 +613,7 @@ namespace ApuAnimalsHotel
             foreach (string item in animal.GetFoodSchedule().GetFoodScheduleById(animal.Id))
             {
                 string test = "[" + (i) + "] " + item;
+                System.Diagnostics.Debug.WriteLine(item);
                 lbFoodSchedule.Items.Add(test);
                 i++;
             }
@@ -666,7 +667,7 @@ namespace ApuAnimalsHotel
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog1.FileName = "";
-            openFileDialog1.Filter = "Text Files (*.txt)|*.txt|Binary Files (*.bin)|*.bin";
+            openFileDialog1.Filter = "|*.txt; *.bin; |Text Files (*.txt)|*.txt|Binary Files (*.bin)|*.bin";
 
             try 
             {
@@ -676,12 +677,16 @@ namespace ApuAnimalsHotel
                     //Check file extension xml/bin and run action accordingly
                     if (Path.GetExtension(openFileName) == ".txt")
                     {
-                        //Do something....
+                        MessageBox.Show(openFileName);
+                        //animalManager.TextDeserialize(openFileName);
+                        animalManager.ReadFromTxt(openFileName);
+                        
                     }
                     else if (Path.GetExtension(openFileName) == ".bin")
                     {
                         //MessageBox.Show("Chosen file is bin"); //replace with real code.
                         animalManager.BinaryDeserialize(openFileName);
+
                         
                     }
                     if (animalManager.Count <= 0)
@@ -713,15 +718,17 @@ namespace ApuAnimalsHotel
         private void textFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             saveFileDialog1.Filter = "txt file (*.txt)|*.txt";
-            //saveFileDialog1.Filter = "xml file (*.xml)|*.xml"; //For testing...xml is to be used with recipes.
 
             saveFileDialog1.FileName = "SavedData" + "-" + DateTime.Now.ToString("yyyMMddHHmmss"); //Default name
 
-            //if (!string.IsNullOrEmpty(saveFileDialog1.FileName) && saveFileDialog1.ShowDialog() == DialogResult.OK)
-            //{
-            //    animalManager.XMLSerialize(saveFileDialog1.FileName);
+            if (!string.IsNullOrEmpty(saveFileDialog1.FileName) && saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                //Add try catch
+                //animalManager.TextSerialize(saveFileDialog1.FileName);
+                animalManager.SaveToTxt(saveFileDialog1.FileName);
+                
 
-            //}
+            }
 
         }
 
@@ -800,7 +807,8 @@ namespace ApuAnimalsHotel
             {
                 if (Path.GetExtension(openFileName) == ".txt")
                 {
-                    //Do something....
+                    animalManager.SaveToTxt(openFileName);
+                    MessageBox.Show("Saved");
                 }
                 else if (Path.GetExtension(openFileName) == ".bin")
                 {
