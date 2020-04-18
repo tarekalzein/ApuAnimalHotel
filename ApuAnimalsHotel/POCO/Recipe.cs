@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace ApuAnimalsHotel.POCO
 {
     public class Recipe
     {
         //private ListManager<string> m_ingredients;
+        [XmlArray("Recipe")]   
         private List<string> m_ingredients;
 
         private string name;
-
         /// <summary>
         /// Constructor method that instantiates a generic list.
         /// </summary>
@@ -22,16 +23,19 @@ namespace ApuAnimalsHotel.POCO
             m_ingredients = new List<string>();
 
             name = Name;
-        }
-        /// <summary>
-        /// Getter for the list
-        /// </summary>
-
+            Ingredients = m_ingredients;
+        }       
 
         /// <summary>
         /// Getter for the Name property
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Used to serialize the embedded list to XML file of recipes.
+        /// </summary>
+        [XmlArrayItem("Ingredient")]
+        public List<string> Ingredients{ get; }
 
         /// <summary>
         /// Method to add ingredient item, it calls the generic method Add in List Manager.
@@ -57,8 +61,5 @@ namespace ApuAnimalsHotel.POCO
             }
             return Name + ": " + ingredients;
         }
-
-
-
     }
 }

@@ -15,8 +15,20 @@ using Newtonsoft.Json.Serialization;
 
 namespace ApuAnimalsHotel.UtilitiesLibrary
 {
+    /// <summary>
+    /// Generic class to handle serialization and deserialization of data from ListManager (except for "SerializeToText" that takes data from animal manager directly.
+    /// Deserialize text method will be handled by the Animal Manager Class.
+    /// </summary>
     public static class SerializerHelper
     {
+        /// <summary>
+        /// Method to select a serialization.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="t">Generic class of the type to be serialized</param>
+        /// <param name="format">Enum of selected serialization method</param>
+        /// <param name="filePath">File path to save/read file to/from</param>
+        /// <returns></returns>
         public static bool Serialize<T>(T t, SerializeFormat format, string filePath)
         {
             switch(format)
@@ -33,7 +45,13 @@ namespace ApuAnimalsHotel.UtilitiesLibrary
         }
 
        
-
+        /// <summary>
+        /// Generic method to select a deserialization method..
+        /// </summary>
+        /// <typeparam name="T">The Generic type of the deserialized data.</typeparam>
+        /// <param name="data">The path (and name) of the file containing data to be deserialized.</param>
+        /// <param name="format">type of deserialization</param>
+        /// <returns></returns>
         public static T Deserialize<T>(string data, SerializeFormat format)
         {
             switch(format)
@@ -48,7 +66,12 @@ namespace ApuAnimalsHotel.UtilitiesLibrary
                     return default(T);
             }
         }
-
+        /// <summary>
+        /// DEPRECATED Method to deserialize Json data from Text file using Newtonsoft.Json.
+        /// </summary>
+        /// <typeparam name="T">Generic: type of data</typeparam>
+        /// <param name="filePath">File path to read data from</param>
+        /// <returns>Object casted to its type</returns>
         private static T DeserializeTXT<T>(string filePath)
         {
             var definition = new { Name = "" };
@@ -67,12 +90,12 @@ namespace ApuAnimalsHotel.UtilitiesLibrary
         }
 
         /// <summary>
-        /// Serialization using Newtonsoft.Json
+        /// DEPRECATED Serialization using Newtonsoft.Json
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="t"></param>
-        /// <param name="filePath"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">Generic: type of data</typeparam>
+        /// <param name="t">object to be serialized</param>
+        /// <param name="filePath">File path to write data to</param>
+        /// <returns>true on success</returns>
         private static bool SerializeToTxt<T>(T t, string filePath)
         {
             new JsonSerializer { TypeNameHandling = TypeNameHandling.Auto };
@@ -85,6 +108,13 @@ namespace ApuAnimalsHotel.UtilitiesLibrary
             return true;
 
         }
+        /// <summary>
+        /// Method to serialize generic data to XML
+        /// </summary>
+        /// <typeparam name="T">Generic: type of data</typeparam>
+        /// <param name="t">object to be serialized></param>
+        /// <param name="filePath">File path to write data to</param>
+        /// <returns>true on success</returns>
         private static bool SerializeToXml<T>(T t, string filePath)
         {
             using (Stream stream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
@@ -95,7 +125,13 @@ namespace ApuAnimalsHotel.UtilitiesLibrary
             }
 
         }
-
+        /// <summary>
+        /// Method to serialize generic data to binary
+        /// </summary>
+        /// <typeparam name="T">Generic: type of data</typeparam>
+        /// <param name="t">object to be serialized></param>
+        /// <param name="filePath">File path to write data to</param>
+        /// <returns>true on success</returns>
         private static bool SerializeToBin<T>(T t, string filePath)
         {
             //add try catch
@@ -106,7 +142,12 @@ namespace ApuAnimalsHotel.UtilitiesLibrary
             return true;
 
         }
-
+        /// <summary>
+        /// Method to deserialize generic data from XML file
+        /// </summary>
+        /// <typeparam name="T">Generic: type of data</typeparam>
+        /// <param name="filePath">File path to read data from</param>
+        /// <returns>Deserialized object</returns>
         private static T DeserializeXml<T>(string filePath)
         {
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
@@ -125,7 +166,13 @@ namespace ApuAnimalsHotel.UtilitiesLibrary
                 if (reader != null) reader.Close();
             }
         }
-
+        /// <summary>
+        /// Method to deserialize generic data from binary file
+        /// </summary>
+        /// <typeparam name="T">Generic: type of data</typeparam>
+        /// <param name="filePath">File path to read data from</param>
+        /// <param name="errorMessage">string that holds an error message</param>
+        /// <returns></returns>
         private static T DeserializeBin<T>(string filePath, out string errorMessage)
         {
             FileStream fileStream = null;
@@ -163,6 +210,11 @@ namespace ApuAnimalsHotel.UtilitiesLibrary
             }
             return (T)obj;
         }
+        /// <summary>
+        /// Method to serialize data from an Animal Manager instance into text file.
+        /// </summary>
+        /// <param name="filePath">File to write data to</param>
+        /// <param name="manager">Animal Manager instance that holds that data.</param>
         public static void  SerializeToText(string filePath, AnimalManager manager)
         {
             using (TextWriter writer = new StreamWriter(filePath))
@@ -236,7 +288,9 @@ namespace ApuAnimalsHotel.UtilitiesLibrary
 
     }
 
-   
+   /// <summary>
+   /// Enums of type of serialization
+   /// </summary>
     public enum SerializeFormat
     {
         XML = 1,

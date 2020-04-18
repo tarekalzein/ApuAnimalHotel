@@ -183,31 +183,50 @@ namespace ApuAnimalsHotel
                 //Code to handle exception.
             }            
         }
-
+        /// <summary>
+        /// Method to pass the m_list to the serializer helper
+        /// </summary>
+        /// <param name="fileName"></param>
         public void BinarySerialize(string fileName)
         {
             SerializerHelper.Serialize(m_list, SerializeFormat.Bin, fileName);
         }
-
+        /// <summary>
+        /// Method that fetches data from SerializerHelper class after binary deserialization to m_list
+        /// </summary>
+        /// <param name="fileName"></param>
         public void BinaryDeserialize(string fileName)
         {
             m_list = SerializerHelper.Deserialize<List<T>>(fileName, SerializeFormat.Bin);
         }
-
+        /// <summary>
+        /// Method to pass the m_list to the serializer helper
+        /// </summary>
+        /// <param name="fileName"></param>
         public void XMLSerialize(string fileName)
         {
             SerializerHelper.Serialize<List<T>>(m_list, SerializeFormat.XML, fileName);
         }
+        /// <summary>
+        /// Method that fetches data from SerializerHelper class after binary deserialization to m_list
+        /// </summary>
+        /// <param name="fileName"></param>
         public void XMLDesrialize(string fileName)
         {
             m_list = SerializerHelper.Deserialize<List<T>>(fileName, SerializeFormat.XML);
         }
-
+        /// <summary>
+        /// Method to pass the m_list to the serializer helper
+        /// </summary>
+        /// <param name="fileName"></param>
         public void TextSerialize(string fileName)
         {
             SerializerHelper.Serialize(m_list, SerializeFormat.TXT, fileName);
         }
-
+        /// <summary>
+        /// DEPRECATED Method to pass the m_list to the serializer helper
+        /// </summary>
+        /// <param name="fileName"></param>
         public void TextDeserialize(string fileName)
         {
             m_list = SerializerHelper.Deserialize<List<T>>(fileName, SerializeFormat.TXT);

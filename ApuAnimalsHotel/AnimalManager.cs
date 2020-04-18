@@ -115,12 +115,20 @@ namespace ApuAnimalsHotel
             SerializerHelper.SerializeToText(filePath, this);
         }
         //This Method can be re-done with a helper class to create instances of Animal.
+        /// <summary>
+        /// A buggy method that reads lines from a text file and use the data to create an instance of an animal.
+        /// Known issues: Foodschedule items are added but the animal manager from the main form can't see it.
+        /// Adding a comma to any of the fields will cause the application to show error message (error in reading the file) when importing the file again.
+        /// This is because the string will be split with the comma as delimter. Adding any comma will cause index out of range exception.
+        /// </summary>
+        /// <param name="filePath"></param>
         public void ReadFromTxt(string filePath)
         {
             string line;
             GenderType gender=GenderType.Unknown;
             StreamReader reader = new StreamReader(filePath);
-            while((line=reader.ReadLine()) !=null)
+            //each line is supposed to hold data for an animal.
+            while((line=reader.ReadLine()) !=null && !string.IsNullOrEmpty(line))
             {
                 Animal animal = null;
                 string[] words = line.Split(',');
@@ -147,8 +155,18 @@ namespace ApuAnimalsHotel
                 string char1= words[4].Split(':')[1];
                 string char2= words[5].Split(':')[1];
 
+                System.Diagnostics.Debug.WriteLine(words[6].Split(':')[1]);
                 string foodSheduleString = words[6].Split(':')[1];
-                string[] foodSchedule = foodSheduleString.Split('[',']').Where(x => !string.IsNullOrEmpty(x)).ToArray();
+                string[] data = foodSheduleString.Split('[', ']');
+
+                List<string> foodSchedule= new List<string>();
+                foreach (string item in data)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                        foodSchedule.Add(item);
+                }
+
+                //foodSchedule= foodSchedule.Where(x => !string.IsNullOrEmpty(x)).ToArray();
 
                 switch (type)
                 {
@@ -208,7 +226,7 @@ namespace ApuAnimalsHotel
                 //string[] test = { "test1", "test2" };
 
 
-                animal.AddFoodScheduleItem(foodSchedule);
+                animal.AddFoodScheduleItem(foodSchedule.ToArray());
                 this.Add(animal);               
 
             }

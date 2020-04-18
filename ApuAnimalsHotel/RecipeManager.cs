@@ -10,9 +10,10 @@ namespace ApuAnimalsHotel
     class RecipeManager : ListManager<Recipe>
     {
         //nothing to do here. Just a container class.
-        public RecipeManager():base()
+        public RecipeManager() : base()
         {
 
         }
     }
+
 }

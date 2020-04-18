@@ -663,7 +663,14 @@ namespace ApuAnimalsHotel
         {
 
         }
-
+        /// <summary>
+        /// Method that opens the OpenFileDialog to let user select file top be opened. File extensions limited to txt and bin.
+        /// Automatically selects the suitable method to read file according to file extension.
+        /// Catches errors of deserialization with try-catch exception handling. Errors creating instances using data from files are checked with IF.
+        /// After successful importing of data from file -> Updates GUI accordingly and saves the opened file name.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog1.FileName = "";
@@ -677,20 +684,22 @@ namespace ApuAnimalsHotel
                     //Check file extension xml/bin and run action accordingly
                     if (Path.GetExtension(openFileName) == ".txt")
                     {
-                        MessageBox.Show(openFileName);
                         //animalManager.TextDeserialize(openFileName);
                         animalManager.ReadFromTxt(openFileName);
                         
                     }
                     else if (Path.GetExtension(openFileName) == ".bin")
                     {
-                        //MessageBox.Show("Chosen file is bin"); //replace with real code.
                         animalManager.BinaryDeserialize(openFileName);
 
                         
                     }
                     if (animalManager.Count <= 0)
+                    {
                         MessageBox.Show("Error importing the file, Please check the content of the file.");
+                        openFileName = "";
+
+                    }
                     UpdateAnimalListView();
                     lbFoodSchedule.Items.Clear();
                     lbEaterType.Items.Clear();
@@ -702,7 +711,11 @@ namespace ApuAnimalsHotel
                 MessageBox.Show("Error opening the selected file");
             }
         }
-
+        /// <summary>
+        /// Method that calls the Binary serialization in SerializationHelper class through the animal manager. Saves the file name so user can save the file at any time.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void binaryFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             saveFileDialog1.Filter = "Binary file (*.bin)|*.bin";
@@ -712,9 +725,14 @@ namespace ApuAnimalsHotel
             if(!string.IsNullOrEmpty(saveFileDialog1.FileName) && saveFileDialog1.ShowDialog()==DialogResult.OK )
             {
                 animalManager.BinarySerialize(saveFileDialog1.FileName);
+                openFileName = saveFileDialog1.FileName; //remembert the saved file after saving it.
             }
         }
-
+        /// <summary>
+        /// Method that calls the Text serialization in SerializationHelper class through the animal manager. Saves the file name so user can save the file at any time.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             saveFileDialog1.Filter = "txt file (*.txt)|*.txt";
@@ -726,12 +744,16 @@ namespace ApuAnimalsHotel
                 //Add try catch
                 //animalManager.TextSerialize(saveFileDialog1.FileName);
                 animalManager.SaveToTxt(saveFileDialog1.FileName);
-                
+                openFileName = saveFileDialog1.FileName; //remembert the saved file after saving it.
 
             }
 
         }
-
+        /// <summary>
+        /// Allows the user to initialize the program exactly as at start-up
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             animalManager = new AnimalManager();
@@ -740,7 +762,9 @@ namespace ApuAnimalsHotel
             openFileName = null; //Reset open file name.
                       
         }
-
+        /// <summary>
+        /// Actions to perform to update the GUI
+        /// </summary>
         private void UpdateGUI()
         {
             UpdateAnimalListView();
@@ -748,7 +772,12 @@ namespace ApuAnimalsHotel
             lbFoodSchedule.Items.Clear();
             lbEaterType.Items.Clear();
         }
-
+        /// <summary>
+        /// Action method to open save file dialog where user can enter file name to be saved with extension XML, on dialog confirmation XML serialization method is called
+        /// Exception handling using try-catch.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void exportToXMLFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             saveFileDialog1.Filter = "XML file (*.xml)|*.xml";
@@ -759,6 +788,8 @@ namespace ApuAnimalsHotel
                 try
                 {
                     recipeManager.XMLSerialize(saveFileDialog1.FileName);
+                    MessageBox.Show("Saved");
+                    
                 }
                 catch
                 {
@@ -766,7 +797,12 @@ namespace ApuAnimalsHotel
                 }
             }
         }
-
+        /// <summary>
+        /// Action method to open the open file dialog where user can select file import Recipe data from, on dialog confirmation XML deserialization method is called
+        /// Exception handling using try-catch.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void importFromXMLFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog1.FileName = "";
@@ -792,7 +828,12 @@ namespace ApuAnimalsHotel
             }
             //UpdateGUI();
         }
-
+        /// <summary>
+        /// Action method that checks if a file is already open and performs save on the same file with same extension on true or calls the save-as action to save new file.
+        /// Exception handling using try-catch.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             /*
@@ -809,6 +850,7 @@ namespace ApuAnimalsHotel
                 {
                     animalManager.SaveToTxt(openFileName);
                     MessageBox.Show("Saved");
+                    
                 }
                 else if (Path.GetExtension(openFileName) == ".bin")
                 {
